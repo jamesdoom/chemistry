@@ -1,0 +1,200 @@
+import { useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { lessons } from "../data/chapters/chapter11";
+import { useProgress } from "../context/ProgressContext";
+import { OrbitalVisual } from "../components/learning/OrbitalVisual";
+import { Practice } from "../components/practice/Practice";
+import { Meter } from "../components/progress/Meter";
+import { topicMastery } from "../utils/learning";
+import type { Lesson } from "../types/curriculum";
+function LearningExperience({ lesson }: { lesson: Lesson }) {
+  const { progress, completeStep } = useProgress();
+  const saved = progress.topics[lesson.topicId];
+  const [index, setIndex] = useState(() => {
+    const next = lesson.steps.findIndex(
+      (s) => !saved?.completedSteps.includes(s.id),
+    );
+    return next === -1 ? 0 : next;
+  });
+  const [explanation, setExplanation] = useState(-1);
+  const [exampleIndex, setExampleIndex] = useState(0);
+  const [finished, setFinished] = useState(false);
+  const step = lesson.steps[index]!;
+  const completed = lesson.steps.filter((s) =>
+    saved?.completedSteps.includes(s.id),
+  ).length;
+  function advance() {
+    completeStep(lesson.topicId, step.id);
+    setExplanation(-1);
+    setExampleIndex(0);
+    if (index === lesson.steps.length - 1) setFinished(true);
+    else setIndex((i) => i + 1);
+  }
+  const mastery = topicMastery(lesson.topicId, saved);
+  return (
+    <>
+      <Link className="breadcrumb" to="/chapters/chapter-11">
+        ← Chapter 11 roadmap
+      </Link>
+      <div className="eyebrow">LEARN / SECTION 11.4</div>
+      <h1 className="lesson-title">{lesson.title}</h1>
+      <p className="muted">{lesson.subtitle}</p>
+      <div className="lesson-layout">
+        <aside className="card lesson-sidebar">
+          <div className="eyebrow">YOUR PATH</div>
+          <ol>
+            {lesson.steps.map((s, i) => (
+              <li key={s.id}>
+                <span className={i === index ? "active-step" : ""}>
+                  {saved?.completedSteps.includes(s.id) ? "✓ " : ""}
+                  {s.title}
+                  {i === index ? " · Current" : ""}
+                </span>
+              </li>
+            ))}
+          </ol>
+          <Meter
+            label="Lesson progress"
+            value={Math.round((completed / lesson.steps.length) * 100)}
+          />
+          <Meter label="Topic mastery" value={mastery.percent} />
+        </aside>
+        <section className="card lesson-card" aria-label="Lesson content">
+          {finished ? (
+            <>
+              <div className="eyebrow">LESSON COMPLETE</div>
+              <h2>You’ve connected the pieces.</h2>
+              <p>
+                Atomic number → electrons → orbitals → electron configuration.
+              </p>
+              <p>
+                Your topic mastery is {mastery.percent}%. Supported answers
+                count as progress; try again without hints to build stronger
+                evidence.
+              </p>
+              <Link className="primary action" to="/practice/orbitals">
+                Practice orbital filling →
+              </Link>
+              <Link className="primary action" to="/">
+                Back to dashboard →
+              </Link>
+            </>
+          ) : (
+            <>
+              <div className="eyebrow">
+                STEP {index + 1} OF {lesson.steps.length} · {step.kind}
+              </div>
+              <h2>{step.title}</h2>
+              {step.kind === "explanation" && (
+                <>
+                  <p className="lesson-copy">{step.text}</p>
+                  <div className="concept-chain">
+                    <span>Atomic number</span>
+                    <b>→</b>
+                    <span>Protons</span>
+                    <b>→</b>
+                    <span>
+                      Electrons
+                      <br />
+                      <small>in a neutral atom</small>
+                    </span>
+                  </div>
+                  <button
+                    className="secondary"
+                    disabled={explanation === step.explanations.length - 1}
+                    onClick={() => setExplanation((e) => e + 1)}
+                  >
+                    I don’t understand
+                    {explanation === step.explanations.length - 1
+                      ? " · All explanations shown"
+                      : ""}
+                  </button>
+                  <div aria-live="polite">
+                    {explanation >= 0 && (
+                      <div className="hint">
+                        <strong>{step.explanations[explanation]!.label}</strong>
+                        <p>{step.explanations[explanation]!.text}</p>
+                      </div>
+                    )}
+                  </div>
+                  <button className="primary next" onClick={advance}>
+                    Let’s see where electrons go →
+                  </button>
+                </>
+              )}
+              {step.kind === "visual" && (
+                <>
+                  <p className="lesson-copy">{step.text}</p>
+                  <OrbitalVisual />
+                  <p className="hint">
+                    For the first 18 atoms, the filling sequence is 1s → 2s → 2p
+                    → 3s → 3p. Ground state means the lowest-energy arrangement.
+                  </p>
+                  <button className="primary next" onClick={advance}>
+                    Work through oxygen →
+                  </button>
+                </>
+              )}
+              {step.kind === "example" && (
+                <>
+                  <OrbitalVisual />
+                  <ol className="worked-steps">
+                    {step.steps.slice(0, exampleIndex + 1).map((s, i) => (
+                      <li key={s}>
+                        <span>{i + 1}</span>
+                        <p>{s}</p>
+                      </li>
+                    ))}
+                  </ol>
+                  {exampleIndex < step.steps.length - 1 ? (
+                    <button
+                      className="primary"
+                      onClick={() => setExampleIndex((i) => i + 1)}
+                    >
+                      Next part of the example →
+                    </button>
+                  ) : (
+                    <button className="primary" onClick={advance}>
+                      Try it with guidance →
+                    </button>
+                  )}
+                </>
+              )}
+              {(step.kind === "practice" || step.kind === "checkpoint") && (
+                <Practice
+                  key={step.id}
+                  question={step.question}
+                  onComplete={advance}
+                />
+              )}
+              {index > 0 && (
+                <button
+                  className="text-button"
+                  onClick={() => {
+                    setIndex((i) => i - 1);
+                    setExampleIndex(0);
+                    setExplanation(-1);
+                  }}
+                >
+                  ← Previous step
+                </button>
+              )}
+            </>
+          )}
+        </section>
+      </div>
+    </>
+  );
+}
+export function LessonPage() {
+  const { lessonId } = useParams();
+  const lesson = lessons.find((l) => l.id === lessonId);
+  return lesson ? (
+    <LearningExperience key={lesson.id} lesson={lesson} />
+  ) : (
+    <>
+      <h1>Lesson not available</h1>
+      <Link to="/chapters/chapter-11">Return to Chapter 11</Link>
+    </>
+  );
+}

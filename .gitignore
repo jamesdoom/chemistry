@@ -1,0 +1,8 @@
+node_modules/
+dist/
+*.local
+.npm-cache/
+*.tsbuildinfo
+dashboard-check.png
+mobile-check.png
+orbital-*-check.png
