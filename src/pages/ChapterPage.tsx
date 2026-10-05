@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { chapter11, lessons } from "../data/chapters/chapter11";
 import { useProgress } from "../context/ProgressContext";
 import { topicMastery } from "../utils/learning";
+import { assessments } from "../data/assessments";
 export function ChapterPage() {
   const { progress } = useProgress();
   return (
@@ -22,6 +23,9 @@ export function ChapterPage() {
             <h2>{section.title}</h2>
             <ul className="topic-list">
               {section.topics.map((topic) => {
+                const assessment = assessments.find(
+                  (item) => item.id === topic.assessmentId,
+                );
                 const status = topicMastery(
                   topic.id,
                   progress.topics[topic.id],
@@ -35,8 +39,10 @@ export function ChapterPage() {
                 return (
                   <li key={topic.id}>
                     <div>
-                      {topic.assessmentId ? (
-                        <Link to="/assessments/11.4">{topic.title} →</Link>
+                      {assessment ? (
+                        <Link to={`/assessments/${assessment.sectionNumber}`}>
+                          {topic.title} →
+                        </Link>
                       ) : topic.lessonId ? (
                         <Link to={`/lessons/${topic.lessonId}`}>
                           {topic.title} →

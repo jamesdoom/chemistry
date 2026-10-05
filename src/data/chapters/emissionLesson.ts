@@ -8,6 +8,7 @@ export const emissionLesson: Lesson = {
   summary:
     "Atoms absorb energy for upward transitions and emit positive-energy photons during downward radiative transitions. Photon energy equals the gap. Specific allowed gaps explain line spectra; the whole pattern comes from many atoms and depends on state populations.",
   completionActions: [
+    { label: "Check Section 11.1 understanding →", to: "/assessments/11.1" },
     {
       label: "Review wavelength and photon energy →",
       to: "/lessons/energy-light",

@@ -3,6 +3,7 @@ import { chapter11, lessons } from "../data/chapters/chapter11";
 import { useProgress } from "../context/ProgressContext";
 import { nextLearningLesson, topicMastery } from "../utils/learning";
 import { Meter } from "../components/progress/Meter";
+import { assessments } from "../data/assessments";
 export function Dashboard() {
   const { progress } = useProgress();
   const current = nextLearningLesson(progress);
@@ -99,25 +100,32 @@ export function Dashboard() {
         <h2>Your chapter roadmap</h2>
         <Link to="/chapters/chapter-11">Explore chapter →</Link>
       </div>
-      <section
-        className="card orbital-invitation"
-        aria-label="Section assessment"
-      >
-        <div>
-          <div className="eyebrow">CONNECT THE THREE TOPICS</div>
-          <h2>Section 11.4 Assessment</h2>
-          <p>
-            Ten mixed checks with a saved report and specific review links.
-            Assessment evidence is separate from lesson mastery.
-          </p>
-        </div>
-        <Link className="primary action" to="/assessments/11.4">
-          {progress.assessments?.["11.4-assessment"]
-            ? "Resume assessment or view report"
-            : "Open assessment"}{" "}
-          →
-        </Link>
-      </section>
+      {assessments.map((assessment) => (
+        <section
+          key={assessment.id}
+          className="card orbital-invitation"
+          aria-label={`Section assessment: ${assessment.sectionNumber}`}
+        >
+          <div>
+            <div className="eyebrow">CONNECT THE SECTION TOPICS</div>
+            <h2>{assessment.title}</h2>
+            <p>
+              {assessment.introduction} {assessment.questions.length} mixed
+              checks with a saved report and review links. Assessment evidence
+              is separate from lesson mastery.
+            </p>
+          </div>
+          <Link
+            className="primary action"
+            to={`/assessments/${assessment.sectionNumber}`}
+          >
+            {progress.assessments?.[assessment.id]
+              ? "Resume assessment or view report"
+              : "Open assessment"}{" "}
+            →
+          </Link>
+        </section>
+      ))}
       <div className="roadmap">
         {chapter11.sections.map((section) => (
           <article

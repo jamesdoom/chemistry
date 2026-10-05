@@ -2,6 +2,9 @@ import type { Assessment } from "../../types/curriculum";
 export const section114Assessment: Assessment = {
   id: "11.4-assessment",
   title: "Section 11.4 Assessment",
+  sectionNumber: "11.4",
+  introduction:
+    "Connect electron arrangements, table location, and atomic properties.",
   questions: [
     {
       id: "assessment-neutral-count",

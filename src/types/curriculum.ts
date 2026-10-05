@@ -22,7 +22,13 @@ export interface Hint {
 export interface Assessment {
   id: string;
   title: string;
-  questions: (PracticeQuestion & { concept: string; reviewTo: string })[];
+  sectionNumber: string;
+  introduction: string;
+  questions: (PracticeQuestion & {
+    concept: string;
+    reviewTo: string;
+    reviewRecommendation?: string;
+  })[];
 }
 export interface PracticeQuestion {
   id: string;

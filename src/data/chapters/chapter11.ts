@@ -28,7 +28,7 @@ export const chapter11: Chapter = {
             ? { lessonId: "energy-light" }
             : i === 2
               ? { lessonId: "atomic-emission" }
-              : {}),
+              : { assessmentId: "11.1-3" }),
       })),
     },
     {

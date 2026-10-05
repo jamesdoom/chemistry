@@ -3,7 +3,7 @@ const {
   chromium,
 } = require("C:/Users/Brian/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright");
 (async () => {
-  const browser = await chromium.launch({ headless: true, channel: "chrome" });
+  const browser = await chromium.launch({ channel: "chrome", headless: true });
   try {
     const page = await browser.newPage({
       viewport: { width: 1440, height: 1000 },
@@ -17,16 +17,17 @@ const {
     const seed = {
       version: 1,
       xp: 30,
-      currentTopicId: "atomic-properties",
-      topics: {
-        "atomic-properties": {
-          completedSteps: ["saved-step"],
+      currentTopicId: "11.1-2",
+      topics: { "11.1-2": { completedSteps: ["concept"], results: {} } },
+      assessments: {
+        "11.4-assessment": {
           results: {
-            "size-na-cl": {
+            "assessment-neutral-count": {
               attempts: 1,
+              firstCorrect: true,
               correct: true,
-              independent: true,
               helpUsed: false,
+              completed: true,
             },
           },
         },
@@ -39,22 +40,33 @@ const {
     );
     await page.reload();
     await page
-      .getByRole("region", { name: "Section assessment: 11.4", exact: true })
-      .getByRole("link", { name: "Open assessment", exact: false })
+      .getByRole("region", { name: "Section assessment: 11.1", exact: true })
+      .getByRole("link", { name: "Open assessment" })
       .click();
+    await page.waitForURL("**/assessments/11.1");
     await page.getByRole("button", { name: "Start assessment" }).click();
-    await page.getByRole("radio", { name: "27", exact: true }).check();
+    await page.locator('input[type="radio"][value="0"]').check();
     await page.getByRole("button", { name: "Check answer" }).click();
-    await page.getByText(/possible mass number/).waitFor();
+    await page.getByText(/inferred model used to explain/).waitFor();
     assert.equal(
       await page.getByText("Solution:", { exact: false }).count(),
       0,
     );
-    await page.getByRole("radio", { name: "13", exact: true }).check();
+    await page.locator('input[type="radio"][value="1"]').check();
     await page.getByRole("button", { name: "Check answer" }).click();
     await page.reload();
     await page.getByText(/Saved correct answer/).waitFor();
     await page.getByRole("button", { name: "Continue →", exact: true }).click();
+    for (const value of ["2", "0", "1"]) {
+      await page.locator(`input[type="radio"][value="${value}"]`).check();
+      await page.getByRole("button", { name: "Check answer" }).click();
+      await page
+        .getByRole("button", { name: "Continue →", exact: true })
+        .click();
+    }
+    await page.getByLabel("Your answer").fill("1e6");
+    await page.getByRole("button", { name: "Check answer" }).click();
+    await page.getByText(/without converting 300 nm/).waitFor();
     await page.getByRole("button", { name: "Hint 1", exact: true }).click();
     await page.reload();
     await page.getByRole("button", { name: "Hint 2", exact: true }).click();
@@ -68,9 +80,20 @@ const {
     await page
       .getByRole("button", { name: "Show solution", exact: true })
       .click();
-    for (let i = 1; i < 10; i++) {
-      const option = page.locator('input[type="radio"][value="0"]');
-      await option.focus();
+    await page.getByLabel("Your answer").fill("1e15");
+    await page.getByRole("button", { name: "Check answer" }).click();
+    await page.getByRole("button", { name: "Continue →", exact: true }).click();
+    await page.getByLabel("Your answer").fill("1.99e-19");
+    await page.getByRole("button", { name: "Check answer" }).click();
+    await page.getByRole("button", { name: "Continue →", exact: true }).click();
+    await page.locator('input[type="radio"][value="1"]').check();
+    await page.getByRole("button", { name: "Check answer" }).click();
+    await page.getByRole("button", { name: "Continue →", exact: true }).click();
+    await page.getByLabel("Your answer").fill("5e-19");
+    await page.getByRole("button", { name: "Check answer" }).click();
+    await page.getByRole("button", { name: "Continue →", exact: true }).click();
+    for (const value of ["2", "0"]) {
+      await page.locator(`input[type="radio"][value="${value}"]`).focus();
       await page.keyboard.press("Space");
       await page.getByRole("button", { name: "Check answer" }).click();
       await page
@@ -90,8 +113,9 @@ const {
       await page.getByRole("link", { name: "Review this concept" }).count(),
       2,
     );
+    await page.getByText(/Convert nanometers to meters first/).waitFor();
     await page.screenshot({
-      path: "assessment-desktop-check.png",
+      path: "section111-desktop-check.png",
       fullPage: true,
     });
     for (const width of [768, 390, 320]) {
@@ -103,7 +127,7 @@ const {
       );
     }
     await page.screenshot({
-      path: "assessment-mobile-check.png",
+      path: "section111-mobile-check.png",
       fullPage: true,
     });
     await page.reload();
@@ -114,28 +138,45 @@ const {
       JSON.parse(localStorage.getItem("orbital.progress.v1")),
     );
     assert.deepEqual(saved.topics, seed.topics);
+    assert.deepEqual(
+      saved.assessments["11.4-assessment"],
+      seed.assessments["11.4-assessment"],
+    );
     assert.equal(saved.xp, 30);
     await page
       .getByRole("link", { name: "Review this concept" })
-      .first()
+      .last()
       .click();
-    await page.waitForURL("**/lessons/first-18");
+    await page.waitForURL("**/lessons/energy-light");
     await page.getByRole("link", { name: "Chapter 11", exact: true }).click();
     await page
       .getByRole("link", { name: "Section 11.4 Assessment", exact: false })
       .click();
-    await page.getByRole("button", { name: "Retake assessment" }).click();
+    await page.waitForURL("**/assessments/11.4");
     await page
-      .getByRole("heading", { name: "Neutral electron counts", exact: true })
+      .getByRole("heading", { name: "Configuration notation", exact: true })
       .waitFor();
+    await page.getByRole("link", { name: "Chapter 11", exact: true }).click();
+    await page
+      .getByRole("link", { name: "Section 11.1 Assessment", exact: false })
+      .click();
+    await page.getByRole("button", { name: "Retake assessment" }).click();
     saved = await page.evaluate(() =>
       JSON.parse(localStorage.getItem("orbital.progress.v1")),
     );
+    assert.deepEqual(saved.assessments["11.1-3"].results, {});
+    assert.deepEqual(
+      saved.assessments["11.4-assessment"],
+      seed.assessments["11.4-assessment"],
+    );
     assert.deepEqual(saved.topics, seed.topics);
-    assert.deepEqual(saved.assessments["11.4-assessment"].results, {});
+    await page.goto("http://127.0.0.1:5173/assessments/99");
+    await page
+      .getByRole("heading", { name: "Assessment not available" })
+      .waitFor();
     assert.deepEqual(errors, []);
     console.log(
-      "PASS: mixed assessment, targeted feedback, progressive help, keyboard, refresh/resume/report, review links, retake isolation, responsive layout, no console errors.",
+      "PASS: Section 11.1 concepts/calculations, targeted recommendations, hints, keyboard, report/resume, responsive layout, review links, isolated retake, cross-assessment navigation, no console errors.",
     );
   } finally {
     await browser.close();

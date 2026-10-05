@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
-import { section114Assessment as assessment } from "../data/chapters/section114Assessment";
+import { Link, useParams } from "react-router-dom";
+import { assessments } from "../data/assessments";
+import type { Assessment } from "../types/curriculum";
 import { useProgress } from "../context/ProgressContext";
 import { Practice } from "../components/practice/Practice";
 import { Meter } from "../components/progress/Meter";
 import { assessmentSummary, updateAssessmentAnswer } from "../utils/assessment";
-export function AssessmentPage() {
+function AssessmentExperience({ assessment }: { assessment: Assessment }) {
   const { progress, saveAssessment } = useProgress();
   const attempt = progress.assessments?.[assessment.id];
   const summary = assessmentSummary(
@@ -26,17 +27,20 @@ export function AssessmentPage() {
       <Link className="breadcrumb" to="/chapters/chapter-11">
         ← Chapter 11 roadmap
       </Link>
-      <div className="eyebrow">CHECK YOUR UNDERSTANDING / SECTION 11.4</div>
+      <div className="eyebrow">
+        CHECK YOUR UNDERSTANDING / SECTION {assessment.sectionNumber}
+      </div>
       <h1>{assessment.title}</h1>
       <p className="intro">
-        Connect electron arrangements, table location, and atomic properties.
-        This is a learning check, not a timed test. Your lesson mastery stays
-        unchanged.
+        {assessment.introduction} This is a learning check, not a timed test.
+        Your lesson mastery stays unchanged.
       </p>
       <section className="card lesson-card" aria-label="Assessment content">
         {!attempt ? (
           <>
-            <h2>Ten small checks. A clearer next step.</h2>
+            <h2>
+              {assessment.questions.length} small checks. A clearer next step.
+            </h2>
             <p>
               Try each question on your own first. Feedback and hints are
               available whenever you need them. Your report highlights first-try
@@ -76,7 +80,12 @@ export function AssessmentPage() {
                             : "Review suggested · Needed a retry"}
                       </p>
                       {!strong && (
-                        <Link to={q.reviewTo}>Review this concept →</Link>
+                        <>
+                          {q.reviewRecommendation && (
+                            <p className="small">{q.reviewRecommendation}</p>
+                          )}
+                          <Link to={q.reviewTo}>Review this concept →</Link>
+                        </>
                       )}
                     </div>
                   </li>
@@ -132,6 +141,20 @@ export function AssessmentPage() {
           </>
         ) : null}
       </section>
+    </>
+  );
+}
+export function AssessmentPage() {
+  const { sectionNumber } = useParams();
+  const assessment = assessments.find(
+    (item) => item.sectionNumber === sectionNumber,
+  );
+  return assessment ? (
+    <AssessmentExperience key={assessment.id} assessment={assessment} />
+  ) : (
+    <>
+      <h1>Assessment not available</h1>
+      <Link to="/chapters/chapter-11">Return to Chapter 11</Link>
     </>
   );
 }
