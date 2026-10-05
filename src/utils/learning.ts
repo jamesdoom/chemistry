@@ -1,7 +1,19 @@
-import { lessons } from "../data/chapters/chapter11";
-import { orbitalExercises } from "../data/practice/orbitals";
-import { calculateMastery } from "./mastery";
-import type { TopicProgress } from "../types/progress";
+import { lessons } from "../data/chapters/chapter11.ts";
+import { orbitalExercises } from "../data/practice/orbitals.ts";
+import { calculateMastery } from "./mastery.ts";
+import type { StudentProgress, TopicProgress } from "../types/progress";
+export function nextLearningLesson(progress: StudentProgress) {
+  const complete = (lesson: (typeof lessons)[number]) =>
+    lesson.steps.every((step) =>
+      progress.topics[lesson.topicId]?.completedSteps.includes(step.id),
+    );
+  const current = lessons.find(
+    (lesson) => lesson.topicId === progress.currentTopicId,
+  );
+  return current && !complete(current)
+    ? current
+    : (lessons.find((lesson) => !complete(lesson)) ?? current ?? lessons[0]!);
+}
 export function topicQuestionIds(topicId: string): string[] {
   return [
     ...lessons
@@ -22,11 +34,11 @@ export function topicMastery(
 ) {
   const ids = topicQuestionIds(topicId);
   // Only score questions in the active curriculum, ignoring retired results.
-  const results = Object.fromEntries(
-    ids.flatMap((id) =>
-      progress?.results[id] ? [[id, progress.results[id]]] : [],
-    ),
-  );
+  const results: TopicProgress["results"] = {};
+  for (const id of ids) {
+    const result = progress?.results[id];
+    if (result) results[id] = result;
+  }
   return calculateMastery(
     progress ? { ...progress, results } : undefined,
     ids.length,

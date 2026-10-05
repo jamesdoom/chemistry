@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { chapter11, firstLesson } from "../data/chapters/chapter11";
+import { chapter11, lessons } from "../data/chapters/chapter11";
 import { useProgress } from "../context/ProgressContext";
 import { topicMastery } from "../utils/learning";
 export function ChapterPage() {
@@ -26,7 +26,10 @@ export function ChapterPage() {
                   topic.id,
                   progress.topics[topic.id],
                 );
-                const complete = firstLesson.steps.every((s) =>
+                const lesson = lessons.find(
+                  (item) => item.id === topic.lessonId,
+                );
+                const complete = lesson?.steps.every((s) =>
                   progress.topics[topic.id]?.completedSteps.includes(s.id),
                 );
                 return (

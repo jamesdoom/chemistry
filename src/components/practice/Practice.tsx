@@ -39,9 +39,8 @@ export function Practice({
       success
         ? `You’ve got it. ${question.explanation}`
         : (targeted ??
-            (question.id === "neutral-count"
-              ? "Neutral means equal numbers of protons and electrons. Use the atomic number to count protons first."
-              : "Check your electron total, filling order, and sublevel capacities: s holds 2, p holds 6. Use spaces between entries, such as 1s2 2s2.")),
+            question.fallbackFeedback ??
+            "Compare your answer with the concept, or use a hint to break it into smaller steps."),
     );
   }
   return (
@@ -60,11 +59,7 @@ export function Practice({
           value={answer}
           onChange={(e) => setAnswer(e.target.value)}
           disabled={correct}
-          placeholder={
-            question.id === "neutral-count"
-              ? "Electron count"
-              : "e.g. 1s2 2s2 …"
-          }
+          placeholder={question.inputPlaceholder ?? "Your answer"}
         />
         <button className="primary" disabled={!answer.trim() || correct}>
           Check answer

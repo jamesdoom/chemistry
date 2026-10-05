@@ -1036,3 +1036,233 @@ footer {
   outline-offset: 4px;
   border-radius: 4px;
 }
+/* Configurations → valence electrons → periodic-table location. */
+.valence-visual {
+  margin: 24px 0;
+  padding: 22px;
+  background: #121c2b;
+  border: 1px solid #46516a;
+  border-radius: 14px;
+}
+.valence-heading {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+.valence-heading .atom-tile {
+  width: 80px;
+  height: 104px;
+  flex-shrink: 0;
+}
+.valence-heading p {
+  margin-bottom: 10px;
+}
+.valence-configuration {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.configuration-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #56617a;
+  border-radius: 9px;
+  padding: 8px 10px;
+  color: #d9e2f3;
+}
+.configuration-entry > span {
+  font-size: 23px;
+}
+.configuration-entry sup {
+  font-size: 14px;
+}
+.configuration-entry small {
+  font-size: 10px;
+  letter-spacing: 0.5px;
+}
+.outer-entry {
+  background: #302c4d;
+  border: 2px solid #bdb3ff;
+  color: #e5dfff;
+}
+.electron-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 24px 0 18px;
+}
+.electron-summary > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.electron-summary span {
+  font-size: 12px;
+  color: #b9c5dc;
+}
+.electron-summary strong {
+  font-size: 25px;
+  font-weight: 600;
+}
+.valence-visual figcaption {
+  font-size: 12px;
+  color: #c4cde0;
+  border-top: 1px solid #344059;
+  padding-top: 14px;
+}
+.compact-periodic-table {
+  display: grid;
+  grid-template-columns: 22px repeat(8, minmax(0, 1fr));
+  grid-template-rows: 22px repeat(3, 70px);
+  gap: 6px;
+  margin: 22px 0;
+  max-width: 100%;
+}
+.table-corner,
+.group-label,
+.period-label {
+  color: #bfc9e0;
+  text-align: center;
+  align-self: center;
+  font-size: 12px;
+}
+.table-corner {
+  font-size: 9px;
+}
+.element-button {
+  background: #222e43;
+  color: #eef1fc;
+  border: 1px solid #6c7d9d;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: 4px;
+  gap: 2px;
+}
+.element-button small {
+  font-size: 10px;
+  line-height: 1.2;
+  color: #c2cde4;
+}
+.element-button strong {
+  font-size: 21px;
+  line-height: 1.2;
+}
+.element-button:hover {
+  background: #38435d;
+}
+.element-button[aria-pressed="true"] {
+  background: #3b3259;
+  border: 2px solid #d2c7ff;
+}
+.element-detail {
+  margin-top: 26px;
+}
+.element-detail h3 {
+  font-size: 19px;
+}
+.element-detail > p {
+  font-size: 14px;
+}
+.element-detail .valence-visual {
+  margin-top: 16px;
+}
+.exploration-checklist {
+  border-top: 1px solid #46516a;
+  padding-top: 18px;
+}
+.exploration-checklist p {
+  margin-bottom: 10px;
+}
+.exploration-checklist ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  color: #d3daed;
+  font-size: 12px;
+}
+.lesson-link {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 13px;
+}
+.progress-summary .meter + .meter {
+  margin-top: 18px;
+}
+@media (max-width: 950px) {
+  .valence-visual {
+    padding: 16px;
+  }
+  .valence-heading {
+    gap: 14px;
+  }
+  .configuration-entry {
+    padding: 6px 8px;
+  }
+  .configuration-entry > span {
+    font-size: 21px;
+  }
+  .valence-heading .atom-tile {
+    width: 65px;
+  }
+  .compact-periodic-table {
+    gap: 4px;
+    grid-template-rows: 22px repeat(3, 60px);
+  }
+}
+@media (max-width: 440px) {
+  .valence-heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .valence-heading .atom-tile {
+    width: 65px;
+    height: 80px;
+  }
+  .valence-heading .atom-tile strong {
+    font-size: 32px;
+  }
+  .electron-summary {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .electron-summary > div {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .electron-summary strong {
+    font-size: 21px;
+  }
+  .compact-periodic-table {
+    grid-template-columns: 16px repeat(8, minmax(0, 1fr));
+    grid-template-rows: 20px repeat(3, 50px);
+    gap: 3px;
+  }
+  .element-button {
+    padding: 2px;
+    border-radius: 4px;
+  }
+  .element-button strong {
+    font-size: 15px;
+  }
+  .element-button small {
+    font-size: 8px;
+  }
+  .group-label,
+  .period-label {
+    font-size: 10px;
+  }
+  .table-corner {
+    font-size: 8px;
+  }
+  .element-detail .valence-visual {
+    padding: 12px;
+  }
+}

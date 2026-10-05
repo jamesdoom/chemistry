@@ -1,22 +1,33 @@
 import { Link } from "react-router-dom";
-import { chapter11, firstLesson, topicId } from "../data/chapters/chapter11";
+import { chapter11, lessons } from "../data/chapters/chapter11";
 import { useProgress } from "../context/ProgressContext";
-import { topicMastery } from "../utils/learning";
+import { nextLearningLesson, topicMastery } from "../utils/learning";
 import { Meter } from "../components/progress/Meter";
 export function Dashboard() {
   const { progress } = useProgress();
-  const topic = progress.topics[topicId];
-  const mastery = topicMastery(topicId, topic);
-  const completed = firstLesson.steps.filter((s) =>
-    topic?.completedSteps.includes(s.id),
-  ).length;
+  const current = nextLearningLesson(progress);
   const allTopics = chapter11.sections.flatMap((s) => s.topics);
   const chapterMastery = Math.round(
     allTopics.reduce(
-      (sum, item) =>
-        sum + topicMastery(item.id, progress.topics[item.id]).percent,
+      (sum, topic) =>
+        sum + topicMastery(topic.id, progress.topics[topic.id]).percent,
       0,
     ) / allTopics.length,
+  );
+  const totalSteps = lessons.reduce(
+    (sum, lesson) => sum + lesson.steps.length,
+    0,
+  );
+  const completedSteps = lessons.reduce(
+    (sum, lesson) =>
+      sum +
+      lesson.steps.filter((s) =>
+        progress.topics[lesson.topicId]?.completedSteps.includes(s.id),
+      ).length,
+    0,
+  );
+  const currentComplete = current.steps.every((s) =>
+    progress.topics[current.topicId]?.completedSteps.includes(s.id),
   );
   return (
     <>
@@ -44,18 +55,14 @@ export function Dashboard() {
             <Meter label="Chapter mastery" value={chapterMastery} />
             <Meter
               label="Available lesson progress"
-              value={Math.round((completed / firstLesson.steps.length) * 100)}
+              value={Math.round((completedSteps / totalSteps) * 100)}
             />
           </div>
-          <Link className="primary action" to="/lessons/first-18">
-            {completed === firstLesson.steps.length
-              ? "Review lesson"
-              : "Continue learning"}{" "}
+          <Link className="primary action" to={`/lessons/${current.id}`}>
+            {currentComplete ? "Review current lesson" : "Continue learning"}{" "}
             <span>→</span>
           </Link>
-          <p className="muted small">
-            Section 11.4 · Electron arrangements · ~12 min
-          </p>
+          <p className="muted small">Section 11.4 · {current.title}</p>
         </section>
         <aside className="card focus-card">
           <div className="eyebrow">YOUR NEXT SMALL STEP</div>
@@ -64,13 +71,9 @@ export function Dashboard() {
             <strong>O</strong>
             <span>Oxygen</span>
           </div>
-          <h3>
-            From atomic number
-            <br />
-            to electron address.
-          </h3>
-          <p>Learn what 1s² 2s² 2p⁴ actually means.</p>
-          <span className="badge">NO MEMORIZATION REQUIRED TO START</span>
+          <h3>{current.title}</h3>
+          <p>{current.subtitle}</p>
+          <span className="badge">ONE CONCEPT AT A TIME</span>
         </aside>
       </div>
       <section className="card orbital-invitation">
@@ -100,34 +103,67 @@ export function Dashboard() {
             <h3>{section.title}</h3>
             <p className="muted">
               {section.id === "11.4"
-                ? "Start here · 1 lesson available"
+                ? `Start here · ${section.topics.filter((t) => t.lessonId).length} lessons available`
                 : "Not started · Lessons coming later"}
             </p>
             {section.id === "11.4" && (
-              <Link to="/lessons/first-18">Open lesson →</Link>
+              <Link to={`/lessons/${current.id}`}>Open lesson →</Link>
             )}
           </article>
         ))}
       </div>
-      <section className="card progress-summary">
-        <div>
-          <div className="eyebrow">BUILDING UNDERSTANDING</div>
-          <h3>Electron arrangements</h3>
-          <p>
-            {mastery.state === "NOT_STARTED"
-              ? "Your first practice will give us a starting point."
-              : mastery.percent < 80
-                ? "Keep practicing this topic to strengthen your understanding."
-                : "Strong work. Revisit the lesson whenever you need a refresher."}
-          </p>
-        </div>
-        <div>
-          <Meter label="Topic mastery" value={mastery.percent} />
-          <span className="muted">
-            {mastery.state.replaceAll("_", " ")} · {progress.xp} XP earned
-          </span>
-        </div>
-      </section>
+      <div className="section-heading">
+        <h2>Your available lessons</h2>
+      </div>
+      {lessons.map((lesson) => {
+        const topic = progress.topics[lesson.topicId];
+        const mastery = topicMastery(lesson.topicId, topic);
+        const completed = lesson.steps.filter((s) =>
+          topic?.completedSteps.includes(s.id),
+        ).length;
+        return (
+          <section
+            className="card progress-summary"
+            aria-label={`Progress: ${lesson.topicId}`}
+            key={lesson.id}
+          >
+            <div>
+              <div className="eyebrow">
+                {current.id === lesson.id && !currentComplete
+                  ? "CURRENT LESSON"
+                  : completed === lesson.steps.length
+                    ? "LESSON COMPLETE"
+                    : "BUILDING UNDERSTANDING"}
+              </div>
+              <h3>{lesson.title}</h3>
+              <p>
+                {mastery.state === "NOT_STARTED"
+                  ? "Your first practice will give us a starting point."
+                  : mastery.percent < 80
+                    ? "Keep practicing this topic to strengthen your understanding."
+                    : "Strong work. Revisit the lesson whenever you need a refresher."}
+              </p>
+              <Link className="lesson-link" to={`/lessons/${lesson.id}`}>
+                {completed === lesson.steps.length
+                  ? "Review lesson"
+                  : "Open this lesson"}{" "}
+                →
+              </Link>
+            </div>
+            <div>
+              <Meter
+                label="Lesson completion"
+                value={Math.round((completed / lesson.steps.length) * 100)}
+              />
+              <Meter label="Topic mastery" value={mastery.percent} />
+              <span className="muted">
+                {mastery.state.replaceAll("_", " ")} · {completed} of{" "}
+                {lesson.steps.length} steps complete
+              </span>
+            </div>
+          </section>
+        );
+      })}
     </>
   );
 }

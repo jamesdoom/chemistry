@@ -3,10 +3,19 @@ import { Link, useParams } from "react-router-dom";
 import { lessons } from "../data/chapters/chapter11";
 import { useProgress } from "../context/ProgressContext";
 import { OrbitalVisual } from "../components/learning/OrbitalVisual";
+import { ValenceVisual } from "../components/learning/ValenceVisual";
+import { PeriodicExplorer } from "../components/learning/PeriodicExplorer";
 import { Practice } from "../components/practice/Practice";
 import { Meter } from "../components/progress/Meter";
 import { topicMastery } from "../utils/learning";
-import type { Lesson } from "../types/curriculum";
+import type { Lesson, LessonVisual } from "../types/curriculum";
+function VisualContent({ visual }: { visual: LessonVisual }) {
+  return visual.kind === "oxygen-orbitals" ? (
+    <OrbitalVisual />
+  ) : (
+    <ValenceVisual atomicNumber={visual.atomicNumber} />
+  );
+}
 function LearningExperience({ lesson }: { lesson: Lesson }) {
   const { progress, completeStep } = useProgress();
   const saved = progress.topics[lesson.topicId];
@@ -64,17 +73,17 @@ function LearningExperience({ lesson }: { lesson: Lesson }) {
             <>
               <div className="eyebrow">LESSON COMPLETE</div>
               <h2>You’ve connected the pieces.</h2>
-              <p>
-                Atomic number → electrons → orbitals → electron configuration.
-              </p>
+              <p>{lesson.summary}</p>
               <p>
                 Your topic mastery is {mastery.percent}%. Supported answers
                 count as progress; try again without hints to build stronger
                 evidence.
               </p>
-              <Link className="primary action" to="/practice/orbitals">
-                Practice orbital filling →
-              </Link>
+              {lesson.completionActions?.map((action) => (
+                <Link key={action.to} className="primary action" to={action.to}>
+                  {action.label}
+                </Link>
+              ))}
               <Link className="primary action" to="/">
                 Back to dashboard →
               </Link>
@@ -82,23 +91,27 @@ function LearningExperience({ lesson }: { lesson: Lesson }) {
           ) : (
             <>
               <div className="eyebrow">
-                STEP {index + 1} OF {lesson.steps.length} · {step.kind}
+                STEP {index + 1} OF {lesson.steps.length} ·{" "}
+                {step.kind === "periodic-table"
+                  ? "Explore"
+                  : step.kind === "checkpoint"
+                    ? "Mastery check"
+                    : step.kind}
               </div>
               <h2>{step.title}</h2>
               {step.kind === "explanation" && (
                 <>
                   <p className="lesson-copy">{step.text}</p>
-                  <div className="concept-chain">
-                    <span>Atomic number</span>
-                    <b>→</b>
-                    <span>Protons</span>
-                    <b>→</b>
-                    <span>
-                      Electrons
-                      <br />
-                      <small>in a neutral atom</small>
-                    </span>
-                  </div>
+                  {step.chain && (
+                    <div className="concept-chain">
+                      {step.chain.map((label, i) => (
+                        <span key={label}>
+                          {i > 0 && <b aria-hidden="true">→ </b>}
+                          {label}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                   <button
                     className="secondary"
                     disabled={explanation === step.explanations.length - 1}
@@ -118,26 +131,23 @@ function LearningExperience({ lesson }: { lesson: Lesson }) {
                     )}
                   </div>
                   <button className="primary next" onClick={advance}>
-                    Let’s see where electrons go →
+                    {step.continueLabel ?? "Continue →"}
                   </button>
                 </>
               )}
               {step.kind === "visual" && (
                 <>
                   <p className="lesson-copy">{step.text}</p>
-                  <OrbitalVisual />
-                  <p className="hint">
-                    For the first 18 atoms, the filling sequence is 1s → 2s → 2p
-                    → 3s → 3p. Ground state means the lowest-energy arrangement.
-                  </p>
+                  <VisualContent visual={step.visual} />
+                  {step.note && <p className="hint">{step.note}</p>}
                   <button className="primary next" onClick={advance}>
-                    Work through oxygen →
+                    {step.continueLabel ?? "Continue →"}
                   </button>
                 </>
               )}
               {step.kind === "example" && (
                 <>
-                  <OrbitalVisual />
+                  {step.visual && <VisualContent visual={step.visual} />}
                   <ol className="worked-steps">
                     {step.steps.slice(0, exampleIndex + 1).map((s, i) => (
                       <li key={s}>
@@ -155,9 +165,21 @@ function LearningExperience({ lesson }: { lesson: Lesson }) {
                     </button>
                   ) : (
                     <button className="primary" onClick={advance}>
-                      Try it with guidance →
+                      {step.continueLabel ?? "Continue →"}
                     </button>
                   )}
+                </>
+              )}
+              {step.kind === "periodic-table" && (
+                <>
+                  <p className="lesson-copy">{step.text}</p>
+                  <PeriodicExplorer
+                    key={step.id}
+                    initialAtomicNumber={step.initialAtomicNumber}
+                    requiredAtomicNumbers={step.requiredAtomicNumbers}
+                    onComplete={advance}
+                    continueLabel={step.continueLabel ?? "Continue →"}
+                  />
                 </>
               )}
               {(step.kind === "practice" || step.kind === "checkpoint") && (

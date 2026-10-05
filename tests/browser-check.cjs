@@ -21,7 +21,7 @@ const { chromium } = require(
       await page
         .getByText("Not started · Coming later", { exact: true })
         .count(),
-      14,
+      13,
     );
     await page
       .getByRole("link", { name: /Electron Arrangements in the First/ })
@@ -86,10 +86,11 @@ const { chromium } = require(
       await page
         .getByRole("progressbar", { name: "Available lesson progress" })
         .getAttribute("value"),
-      "100",
+      "38",
     );
     assert.equal(
       await page
+        .getByRole("region", { name: "Progress: electron-arrangements" })
         .getByRole("progressbar", { name: "Topic mastery" })
         .getAttribute("value"),
       "12",
@@ -98,6 +99,7 @@ const { chromium } = require(
     assert.equal(await page.locator(".xp").innerText(), "✦ 30 XP");
     assert.equal(
       await page
+        .getByRole("region", { name: "Progress: electron-arrangements" })
         .getByRole("progressbar", { name: "Topic mastery" })
         .getAttribute("value"),
       "12",

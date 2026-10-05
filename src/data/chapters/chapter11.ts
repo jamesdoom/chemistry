@@ -1,4 +1,5 @@
 import type { Chapter, Lesson, PracticeQuestion } from "../../types/curriculum";
+import { periodicLesson } from "./periodicLesson.ts";
 export const topicId = "electron-arrangements";
 export const chapter11: Chapter = {
   id: "chapter-11",
@@ -51,6 +52,7 @@ export const chapter11: Chapter = {
         {
           id: "configurations-periodic-table",
           title: "Electron Configurations and the Periodic Table",
+          lessonId: "periodic-table",
         },
         {
           id: "atomic-properties",
@@ -68,6 +70,9 @@ const questions: PracticeQuestion[] = [
     prompt:
       "Nitrogen has atomic number 7. How many electrons does a neutral nitrogen atom have?",
     answer: "7",
+    inputPlaceholder: "Electron count",
+    fallbackFeedback:
+      "Neutral means equal numbers of protons and electrons. Use the atomic number to count protons first.",
     explanation:
       "Atomic number counts protons. A neutral atom has equal numbers of protons and electrons, so nitrogen has 7 electrons.",
     hints: [
@@ -93,6 +98,9 @@ const questions: PracticeQuestion[] = [
     prompt:
       "Write nitrogen’s ground-state electron configuration. It has 7 electrons. Use plain numbers, like 1s2 2s2 2p3.",
     answer: "1s2 2s2 2p3",
+    inputPlaceholder: "e.g. 1s2 2s2 …",
+    fallbackFeedback:
+      "Check your electron total, filling order, and sublevel capacities: s holds 2, p holds 6. Use spaces between entries, such as 1s2 2s2.",
     explanation:
       "Two electrons occupy 1s, two occupy 2s, and the remaining three occupy 2p. The exponents add to 7.",
     hints: [
@@ -125,6 +133,9 @@ const questions: PracticeQuestion[] = [
     prompt:
       "Try this on your own: write the ground-state configuration of neutral argon (atomic number 18). Use plain-number notation.",
     answer: "1s2 2s2 2p6 3s2 3p6",
+    inputPlaceholder: "e.g. 1s2 2s2 …",
+    fallbackFeedback:
+      "Check your electron total, filling order, and sublevel capacities: s holds 2, p holds 6. Use spaces between entries, such as 1s2 2s2.",
     explanation:
       "The occupations 2 + 2 + 6 + 2 + 6 total 18. Argon has a filled outer s and p shell and is in group 18, period 3.",
     hints: [
@@ -151,11 +162,21 @@ export const firstLesson: Lesson = {
   topicId,
   title: "Making sense of electron arrangements",
   subtitle: "First 18 atoms · Section 11.4 · About 12 minutes",
+  summary: "Atomic number → electrons → orbitals → electron configuration.",
+  completionActions: [
+    {
+      label: "Learn valence electrons and the periodic table →",
+      to: "/lessons/periodic-table",
+    },
+    { label: "Practice orbital filling →", to: "/practice/orbitals" },
+  ],
   steps: [
     {
       id: "concept",
       kind: "explanation",
       title: "Start with the atom, not the chart",
+      chain: ["Atomic number", "Protons", "Electrons in a neutral atom"],
+      continueLabel: "Let’s see where electrons go →",
       text: "Atomic number counts protons. In a neutral atom, every positive proton is balanced by one negative electron. Once you know how many electrons you have, you can work out where they go.",
       explanations: [
         {
@@ -180,12 +201,17 @@ export const firstLesson: Lesson = {
       id: "visual",
       kind: "visual",
       title: "A configuration is an electron address",
+      visual: { kind: "oxygen-orbitals" },
+      note: "For the first 18 atoms, the filling sequence is 1s → 2s → 2p → 3s → 3p. Ground state means the lowest-energy arrangement.",
+      continueLabel: "Work through oxygen →",
       text: "The number (2) names an energy level. The letter (p) names a sublevel. The superscript (4) counts electrons in that sublevel. An orbital is a region described by a wave function where an electron may be found, not a circular track. An s sublevel has 1 orbital; a p sublevel has 3. Each orbital holds at most 2 electrons with opposite spins.",
     },
     {
       id: "example",
       kind: "example",
       title: "Build oxygen, one step at a time",
+      visual: { kind: "oxygen-orbitals" },
+      continueLabel: "Try it with guidance →",
       steps: [
         "Oxygen has atomic number 8 → 8 protons → 8 electrons when neutral.",
         "In the ground state, fill lower-energy sublevels first (Aufbau): 1s, 2s, then 2p. Put 2 in 1s and 2 in 2s.",
@@ -214,4 +240,4 @@ export const firstLesson: Lesson = {
     },
   ],
 };
-export const lessons = [firstLesson];
+export const lessons = [firstLesson, periodicLesson];
