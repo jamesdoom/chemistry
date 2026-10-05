@@ -8,6 +8,7 @@ export const lightLesson: Lesson = {
   summary:
     "In a vacuum, c = λν links wavelength to frequency. E = hν links frequency to energy per photon. Convert lengths to meters before calculating, and keep photon energy separate from beam intensity.",
   completionActions: [
+    { label: "Continue to atomic emission →", to: "/lessons/atomic-emission" },
     {
       label: "Review Rutherford’s evidence →",
       to: "/lessons/rutherford",

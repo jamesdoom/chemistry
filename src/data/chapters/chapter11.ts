@@ -3,6 +3,7 @@ import { periodicLesson } from "./periodicLesson.ts";
 import { trendsLesson } from "./trendsLesson.ts";
 import { rutherfordLesson } from "./rutherfordLesson.ts";
 import { lightLesson } from "./lightLesson.ts";
+import { emissionLesson } from "./emissionLesson.ts";
 export const topicId = "electron-arrangements";
 export const chapter11: Chapter = {
   id: "chapter-11",
@@ -25,7 +26,9 @@ export const chapter11: Chapter = {
           ? { lessonId: "rutherford" }
           : i === 1
             ? { lessonId: "energy-light" }
-            : {}),
+            : i === 2
+              ? { lessonId: "atomic-emission" }
+              : {}),
       })),
     },
     {
@@ -262,4 +265,5 @@ export const lessons = [
   trendsLesson,
   rutherfordLesson,
   lightLesson,
+  emissionLesson,
 ];

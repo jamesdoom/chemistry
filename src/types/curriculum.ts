@@ -46,7 +46,7 @@ export type LessonVisual =
 export type LessonStep =
   | {
       id: string;
-      kind: "scattering-explorer" | "wave-explorer";
+      kind: "scattering-explorer" | "wave-explorer" | "emission-explorer";
       title: string;
       text: string;
       continueLabel?: string;

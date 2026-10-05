@@ -1365,12 +1365,12 @@ footer {
 .trend-outer-orbitals .orbital-row {
   gap: 5px;
 }
-:is(.trend-explorer, .scattering-explorer) > label {
+:is(.trend-explorer, .scattering-explorer, .emission-explorer) > label {
   display: block;
   font-size: 14px;
   margin-bottom: 10px;
 }
-:is(.trend-explorer, .scattering-explorer) select {
+:is(.trend-explorer, .scattering-explorer, .emission-explorer) select {
   background: #121c2b;
   color: #edf1fa;
   border: 1px solid #65718a;
@@ -1381,7 +1381,8 @@ footer {
   width: 100%;
   min-width: 0;
 }
-:is(.trend-explorer, .scattering-explorer) select:focus-visible {
+:is(.trend-explorer, .scattering-explorer, .emission-explorer)
+  select:focus-visible {
   outline: 3px solid #b5cbff;
   outline-offset: 4px;
 }
@@ -1454,7 +1455,7 @@ footer {
   }
 }
 @media (max-width: 440px) {
-  :is(.trend-explorer, .scattering-explorer) select {
+  :is(.trend-explorer, .scattering-explorer, .emission-explorer) select {
     font-size: 13px;
     padding: 10px;
   }
@@ -1552,4 +1553,37 @@ footer {
 }
 .wave-readouts p {
   overflow-wrap: anywhere;
+}
+
+.energy-figure,
+.spectrum-figure {
+  margin: 1.5rem 0;
+}
+.energy-figure svg,
+.spectrum-figure svg {
+  width: 100%;
+  background: #101827;
+  border-radius: 16px;
+}
+.energy-figure text,
+.spectrum-figure text {
+  fill: #e3eaf4;
+  font-size: 16px;
+}
+.energy-level {
+  stroke: #8495b0;
+  stroke-width: 2;
+}
+.energy-transition {
+  stroke: #c0b4ff;
+  stroke-width: 3;
+}
+.energy-state {
+  fill: #f4c66b;
+}
+.energy-figure figcaption,
+.spectrum-figure figcaption {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #a8b8cd;
 }

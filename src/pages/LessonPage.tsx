@@ -9,6 +9,7 @@ import { TrendComparisonVisual } from "../components/learning/TrendComparisonVis
 import { TrendExplorer } from "../components/learning/TrendExplorer";
 import { ScatteringExplorer } from "../components/learning/ScatteringExplorer";
 import { WaveExplorer } from "../components/learning/WaveExplorer";
+import { EmissionExplorer } from "../components/learning/EmissionExplorer";
 import { Practice } from "../components/practice/Practice";
 import { Meter } from "../components/progress/Meter";
 import { topicMastery } from "../utils/learning";
@@ -112,7 +113,8 @@ function LearningExperience({ lesson }: { lesson: Lesson }) {
                 {step.kind === "periodic-table" ||
                 step.kind === "trend-explorer" ||
                 step.kind === "scattering-explorer" ||
-                step.kind === "wave-explorer"
+                step.kind === "wave-explorer" ||
+                step.kind === "emission-explorer"
                   ? "Explore"
                   : step.kind === "checkpoint"
                     ? "Mastery check"
@@ -228,6 +230,16 @@ function LearningExperience({ lesson }: { lesson: Lesson }) {
                 <>
                   <p className="lesson-copy">{step.text}</p>
                   <WaveExplorer
+                    key={step.id}
+                    onComplete={advance}
+                    continueLabel={step.continueLabel ?? "Continue →"}
+                  />
+                </>
+              )}
+              {step.kind === "emission-explorer" && (
+                <>
+                  <p className="lesson-copy">{step.text}</p>
+                  <EmissionExplorer
                     key={step.id}
                     onComplete={advance}
                     continueLabel={step.continueLabel ?? "Continue →"}

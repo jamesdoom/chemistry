@@ -8,7 +8,7 @@ Three Section 11.4 learning topics are functional:
 - Electron Configurations and the Periodic Table: valence electrons, groups/periods, a first-18 table, and helium's exception.
 - Atomic Properties and the Periodic Table: size, shielding, nuclear attraction, first ionization energy, and sublevel/pairing exceptions.
 
-Section 11.4 Assessment is functional: ten mixed checks, a saved latest-attempt report, and concept-specific review links. Assessment evidence is saved separately from lesson scores. Rutherford’s Atom in Section 11.1 is now functional, with a qualitative scattering explorer. Energy and Light is also functional, including a wave/amplitude explorer and numerical practice. The remaining topics in Sections 11.1–11.3 remain navigation metadata, not completed lessons. The plan completes the listed course topics with original supplemental teaching; it does not reproduce every detail of the textbook.
+Section 11.4 Assessment is functional: ten mixed checks, a saved latest-attempt report, and concept-specific review links. Assessment evidence is saved separately from lesson scores. Rutherford’s Atom in Section 11.1 is now functional, with a qualitative scattering explorer. Energy and Light is also functional, including a wave/amplitude explorer and numerical practice. Emission of Energy by Atoms is also functional, with an illustrative level/spectrum explorer and energy-gap practice. Section 11.1 Assessment and the topics in Sections 11.2–11.3 remain navigation metadata, not completed lessons. The plan completes the listed course topics with original supplemental teaching; it does not reproduce every detail of the textbook.
 
 ## Rules for each update
 
@@ -34,7 +34,7 @@ Use an adjustable wave visual to teach wavelength, frequency, and photon energy.
 
 Done when: students predict the relationships before calculating and receive targeted feedback about units or reversed relationships.
 
-### 4. Section 11.1 — Emission of Energy by Atoms
+### 4. Section 11.1 — Emission of Energy by Atoms — completed
 
 Add original energy-level and spectral-line visuals showing absorption versus emission. A downward transition can emit a photon matching the energy difference. Contrast line spectra with continuous light. Label illustrative gaps; cite any measured wavelengths rather than inventing data.
 
@@ -88,4 +88,4 @@ Done when: all 15 listed Chapter 11 topics have functional lessons/assessments, 
 
 ## Implementation order
 
-Milestone 1 is complete. Milestone 2 is complete. Milestone 3 is complete. Start milestone 4 next: Emission of Energy by Atoms. Then continue through 11.1, 11.2, and 11.3 in order. Milestones containing multiple lessons or an assessment deliberately span separate updates. Revisit scope after each milestone using actual student misconceptions and course expectations, keeping optional content distinct from required mastery evidence.
+Milestone 1 is complete. Milestone 2 is complete. Milestone 3 is complete. Milestone 4 is complete. Start milestone 5 next: Section 11.1 Assessment. Then continue through 11.1, 11.2, and 11.3 in order. Milestones containing multiple lessons or an assessment deliberately span separate updates. Revisit scope after each milestone using actual student misconceptions and course expectations, keeping optional content distinct from required mastery evidence.
