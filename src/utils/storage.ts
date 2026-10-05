@@ -33,6 +33,30 @@ function isTopic(value: unknown): value is TopicProgress {
     Object.values(t.results).every(isResult)
   );
 }
+function isAssessments(value: unknown): boolean {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  return Object.values(value).every((assessment: unknown) => {
+    if (!assessment || typeof assessment !== "object") return false;
+    const results = (assessment as Record<string, unknown>).results;
+    return (
+      !!results &&
+      typeof results === "object" &&
+      !Array.isArray(results) &&
+      Object.values(results).every((result: unknown) => {
+        if (!result || typeof result !== "object") return false;
+        const r = result as Record<string, unknown>;
+        return (
+          typeof r.attempts === "number" &&
+          Number.isInteger(r.attempts) &&
+          r.attempts >= 0 &&
+          ["firstCorrect", "correct", "helpUsed", "completed"].every(
+            (key) => typeof r[key] === "boolean",
+          )
+        );
+      })
+    );
+  });
+}
 export function loadProgress(): StudentProgress {
   try {
     const raw: unknown = JSON.parse(
@@ -51,6 +75,11 @@ export function loadProgress(): StudentProgress {
       !Object.values(p.topics).every(isTopic)
     )
       return emptyProgress();
+    // A damaged assessment must not discard otherwise valid earlier lesson progress.
+    if (p.assessments !== undefined && !isAssessments(p.assessments)) {
+      const { assessments: _discarded, ...valid } = p;
+      return valid as unknown as StudentProgress;
+    }
     return raw as StudentProgress;
   } catch {
     return emptyProgress();

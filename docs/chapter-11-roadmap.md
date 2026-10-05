@@ -8,7 +8,7 @@ Three Section 11.4 learning topics are functional:
 - Electron Configurations and the Periodic Table: valence electrons, groups/periods, a first-18 table, and helium's exception.
 - Atomic Properties and the Periodic Table: size, shielding, nuclear attraction, first ionization energy, and sublevel/pairing exceptions.
 
-Section 11.4 Assessment is not implemented. Sections 11.1–11.3 remain navigation metadata, not completed lessons. The plan completes the listed course topics with original supplemental teaching; it does not reproduce every detail of the textbook.
+Section 11.4 Assessment is functional: ten mixed checks, a saved latest-attempt report, and concept-specific review links. Assessment evidence is saved separately from lesson scores. Sections 11.1–11.3 remain navigation metadata, not completed lessons. The plan completes the listed course topics with original supplemental teaching; it does not reproduce every detail of the textbook.
 
 ## Rules for each update
 
@@ -16,9 +16,9 @@ Deliver one short lesson or assessment at a time. Use original concept → visua
 
 ## Ordered milestones
 
-### 1. Finish Section 11.4 Assessment
+### 1. Finish Section 11.4 Assessment � completed
 
-Add an original mixed check covering neutral electron counts, configurations, Aufbau/Pauli/Hund, valence electrons, group/period, atomic size, and first ionization energy. Ask for explanations as well as predictions, using transfer examples instead of repeated worked examples. Provide strengths, weak-concept feedback, and links to the three existing lessons. Store assessment evidence under its own topic without overwriting learning-topic scores. Extend notation or elements only where course expectations require it; do not silently apply H–Ar rules to transition metals.
+Add an original mixed check covering neutral electron counts, configurations, Aufbau/Pauli/Hund, valence electrons, group/period, atomic size, and first ionization energy. Ask for explanations as well as predictions, using transfer examples instead of repeated worked examples. Provide strengths, weak-concept feedback, and links to the three existing lessons. Store assessment evidence under its own assessment ID without overwriting learning-topic scores. Extend notation or elements only where course expectations require it; do not silently apply H–Ar rules to transition metals.
 
 Done when: the assessment is navigable and persisted, feedback points to specific concepts, and existing progress is preserved.
 
@@ -88,4 +88,4 @@ Done when: all 15 listed Chapter 11 topics have functional lessons/assessments, 
 
 ## Implementation order
 
-Start with milestone 1 next to finish the student's current Section 11.4 needs. Then build 11.1, 11.2, and 11.3 in order. Milestones containing multiple lessons or an assessment deliberately span separate updates. Revisit scope after each milestone using actual student misconceptions and course expectations, keeping optional content distinct from required mastery evidence.
+Milestone 1 is complete. Start milestone 2 next: Rutherford's Atom. Then continue through 11.1, 11.2, and 11.3 in order. Milestones containing multiple lessons or an assessment deliberately span separate updates. Revisit scope after each milestone using actual student misconceptions and course expectations, keeping optional content distinct from required mastery evidence.

@@ -35,7 +35,9 @@ export function ChapterPage() {
                 return (
                   <li key={topic.id}>
                     <div>
-                      {topic.lessonId ? (
+                      {topic.assessmentId ? (
+                        <Link to="/assessments/11.4">{topic.title} →</Link>
+                      ) : topic.lessonId ? (
                         <Link to={`/lessons/${topic.lessonId}`}>
                           {topic.title} →
                         </Link>
@@ -44,9 +46,13 @@ export function ChapterPage() {
                       )}
                     </div>
                     <span className="muted small">
-                      {topic.lessonId
-                        ? `${complete ? "Lesson complete" : status.state.replaceAll("_", " ")} · ${status.percent}% mastery`
-                        : "Not started · Coming later"}
+                      {topic.assessmentId
+                        ? progress.assessments?.[topic.assessmentId]
+                          ? "Assessment available · Resume or view report"
+                          : "Assessment available · Not started"
+                        : topic.lessonId
+                          ? `${complete ? "Lesson complete" : status.state.replaceAll("_", " ")} · ${status.percent}% mastery`
+                          : "Not started · Coming later"}
                     </span>
                   </li>
                 );

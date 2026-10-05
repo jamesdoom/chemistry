@@ -226,6 +226,7 @@ export const trendsLesson: Lesson = {
   summary:
     "Occupied levels, shielding, and nuclear attraction explain broad trends. Sublevel energies and electron pairing explain why first ionization energy has exceptions.",
   completionActions: [
+    { label: "Check Section 11.4 understanding →", to: "/assessments/11.4" },
     {
       label: "Review the periodic-table connection →",
       to: "/lessons/periodic-table",

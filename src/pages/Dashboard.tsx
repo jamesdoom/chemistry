@@ -99,6 +99,25 @@ export function Dashboard() {
         <h2>Your chapter roadmap</h2>
         <Link to="/chapters/chapter-11">Explore chapter →</Link>
       </div>
+      <section
+        className="card orbital-invitation"
+        aria-label="Section assessment"
+      >
+        <div>
+          <div className="eyebrow">CONNECT THE THREE TOPICS</div>
+          <h2>Section 11.4 Assessment</h2>
+          <p>
+            Ten mixed checks with a saved report and specific review links.
+            Assessment evidence is separate from lesson mastery.
+          </p>
+        </div>
+        <Link className="primary action" to="/assessments/11.4">
+          {progress.assessments?.["11.4-assessment"]
+            ? "Resume assessment or view report"
+            : "Open assessment"}{" "}
+          →
+        </Link>
+      </section>
       <div className="roadmap">
         {chapter11.sections.map((section) => (
           <article

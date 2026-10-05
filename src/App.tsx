@@ -12,6 +12,7 @@ import { Dashboard } from "./pages/Dashboard";
 import { ChapterPage } from "./pages/ChapterPage";
 import { LessonPage } from "./pages/LessonPage";
 import { OrbitalPracticePage } from "./pages/OrbitalPracticePage";
+import { AssessmentPage } from "./pages/AssessmentPage";
 function Shell() {
   const { progress, storageFailed } = useProgress();
   const location = useLocation();
@@ -51,6 +52,7 @@ function Shell() {
           <Route path="/chapters/chapter-11" element={<ChapterPage />} />
           <Route path="/lessons/:lessonId" element={<LessonPage />} />
           <Route path="/practice/orbitals" element={<OrbitalPracticePage />} />
+          <Route path="/assessments/11.4" element={<AssessmentPage />} />
           <Route
             path="*"
             element={

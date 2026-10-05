@@ -14,9 +14,15 @@ export interface Topic {
   id: string;
   title: string;
   lessonId?: string;
+  assessmentId?: string;
 }
 export interface Hint {
   text: string;
+}
+export interface Assessment {
+  id: string;
+  title: string;
+  questions: (PracticeQuestion & { concept: string; reviewTo: string })[];
 }
 export interface PracticeQuestion {
   id: string;

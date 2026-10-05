@@ -10,15 +10,25 @@ export function normalizeAnswer(value: string): string {
 export function Practice({
   question,
   onComplete,
+  onAnswer,
+  onHelp,
+  initialCorrect = false,
+  initialHelpUsed = false,
 }: {
   question: PracticeQuestion;
   onComplete: () => void;
+  onAnswer?: (correct: boolean, helpUsed: boolean) => void;
+  onHelp?: () => void;
+  initialCorrect?: boolean;
+  initialHelpUsed?: boolean;
 }) {
   const { recordAnswer } = useProgress();
-  const [answer, setAnswer] = useState("");
-  const [feedback, setFeedback] = useState("");
-  const [correct, setCorrect] = useState(false);
-  const [help, setHelp] = useState(0);
+  const [answer, setAnswer] = useState(initialCorrect ? question.answer : "");
+  const [feedback, setFeedback] = useState(
+    initialCorrect ? `Saved correct answer. ${question.explanation}` : "",
+  );
+  const [correct, setCorrect] = useState(initialCorrect);
+  const [help, setHelp] = useState(initialHelpUsed ? 1 : 0);
   const [attempted, setAttempted] = useState(false);
   const helpLabels = [
     "Hint 1",
@@ -31,7 +41,8 @@ export function Practice({
     const success = normalized === normalizeAnswer(question.answer);
     setAttempted(true);
     setCorrect(success);
-    recordAnswer(question.topicId, question.id, success, help > 0);
+    if (onAnswer) onAnswer(success, help > 0);
+    else recordAnswer(question.topicId, question.id, success, help > 0);
     const targeted = Object.entries(question.misconceptionFeedback).find(
       ([key]) => normalizeAnswer(key) === normalized,
     )?.[1];
@@ -94,7 +105,10 @@ export function Practice({
       {!correct && (
         <button
           className="secondary"
-          onClick={() => setHelp((h) => Math.min(4, h + 1))}
+          onClick={() => {
+            setHelp((h) => Math.min(4, h + 1));
+            onHelp?.();
+          }}
           disabled={help === 4}
         >
           {helpLabels[help] ?? "Solution shown"}

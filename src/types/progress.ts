@@ -15,4 +15,15 @@ export interface StudentProgress {
   xp: number;
   currentTopicId: string;
   topics: Record<string, TopicProgress>;
+  assessments?: Record<string, AssessmentProgress>;
+}
+export interface AssessmentResult {
+  attempts: number;
+  firstCorrect: boolean;
+  correct: boolean;
+  helpUsed: boolean;
+  completed: boolean;
+}
+export interface AssessmentProgress {
+  results: Record<string, AssessmentResult>;
 }

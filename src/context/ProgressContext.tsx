@@ -5,11 +5,16 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import type { StudentProgress, TopicProgress } from "../types/progress";
+import type {
+  StudentProgress,
+  TopicProgress,
+  AssessmentProgress,
+} from "../types/progress";
 import { loadProgress, saveProgress } from "../utils/storage";
 interface ProgressValue {
   progress: StudentProgress;
   storageFailed: boolean;
+  saveAssessment: (id: string, attempt: AssessmentProgress) => void;
   completeStep: (topicId: string, stepId: string) => void;
   recordAnswer: (
     topicId: string,
@@ -23,6 +28,12 @@ const blankTopic = (): TopicProgress => ({ completedSteps: [], results: {} });
 export function ProgressProvider({ children }: { children: ReactNode }) {
   const [progress, setProgress] = useState(loadProgress);
   const [storageFailed, setStorageFailed] = useState(false);
+  function saveAssessment(id: string, attempt: AssessmentProgress) {
+    setProgress((p) => ({
+      ...p,
+      assessments: { ...p.assessments, [id]: attempt },
+    }));
+  }
   useEffect(() => {
     setStorageFailed(!saveProgress(progress));
   }, [progress]);
@@ -76,7 +87,13 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   }
   return (
     <ProgressContext.Provider
-      value={{ progress, storageFailed, completeStep, recordAnswer }}
+      value={{
+        progress,
+        storageFailed,
+        completeStep,
+        recordAnswer,
+        saveAssessment,
+      }}
     >
       {children}
     </ProgressContext.Provider>

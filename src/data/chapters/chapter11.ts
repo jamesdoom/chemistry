@@ -60,7 +60,11 @@ export const chapter11: Chapter = {
           title: "Atomic Properties and the Periodic Table",
           lessonId: "atomic-trends",
         },
-        { id: "11.4-assessment", title: "Section 11.4 Assessment" },
+        {
+          id: "11.4-assessment",
+          title: "Section 11.4 Assessment",
+          assessmentId: "11.4-assessment",
+        },
       ],
     },
   ],
