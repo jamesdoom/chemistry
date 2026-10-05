@@ -21,7 +21,7 @@ const { chromium } = require(
       await page
         .getByText("Not started · Coming later", { exact: true })
         .count(),
-      7,
+      5,
     );
     await page
       .getByRole("link", { name: /Electron Arrangements in the First/ })
@@ -86,7 +86,7 @@ const { chromium } = require(
       await page
         .getByRole("progressbar", { name: "Available lesson progress" })
         .getAttribute("value"),
-      "11",
+      "9",
     );
     assert.equal(
       await page

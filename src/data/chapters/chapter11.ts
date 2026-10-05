@@ -4,6 +4,8 @@ import { trendsLesson } from "./trendsLesson.ts";
 import { rutherfordLesson } from "./rutherfordLesson.ts";
 import { lightLesson } from "./lightLesson.ts";
 import { emissionLesson } from "./emissionLesson.ts";
+import { hydrogenLevelsLesson } from "./hydrogenLevelsLesson.ts";
+import { bohrLesson } from "./bohrLesson.ts";
 export const topicId = "electron-arrangements";
 export const chapter11: Chapter = {
   id: "chapter-11",
@@ -40,7 +42,15 @@ export const chapter11: Chapter = {
         "The Bohr Model of the Atom",
         "The Wave Mechanical Model of the Atom",
         "Section 11.2 Assessment",
-      ].map((title, i) => ({ id: `11.2-${i}`, title })),
+      ].map((title, i) => ({
+        id: `11.2-${i}`,
+        title,
+        ...(i === 0
+          ? { lessonId: "hydrogen-levels" }
+          : i === 1
+            ? { lessonId: "bohr-model" }
+            : {}),
+      })),
     },
     {
       id: "11.3",
@@ -266,4 +276,6 @@ export const lessons = [
   rutherfordLesson,
   lightLesson,
   emissionLesson,
+  hydrogenLevelsLesson,
+  bohrLesson,
 ];

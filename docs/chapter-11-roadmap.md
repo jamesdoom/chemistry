@@ -8,7 +8,7 @@ Three Section 11.4 learning topics are functional:
 - Electron Configurations and the Periodic Table: valence electrons, groups/periods, a first-18 table, and helium's exception.
 - Atomic Properties and the Periodic Table: size, shielding, nuclear attraction, first ionization energy, and sublevel/pairing exceptions.
 
-Section 11.4 Assessment is functional: ten mixed checks, a saved latest-attempt report, and concept-specific review links. Assessment evidence is saved separately from lesson scores. Rutherford’s Atom in Section 11.1 is now functional, with a qualitative scattering explorer. Energy and Light is also functional, including a wave/amplitude explorer and numerical practice. Emission of Energy by Atoms is also functional, with an illustrative level/spectrum explorer and energy-gap practice. Section 11.1 Assessment is functional, with conceptual questions, three calculations, and targeted review recommendations. The topics in Sections 11.2–11.3 remain navigation metadata, not completed lessons. The plan completes the listed course topics with original supplemental teaching; it does not reproduce every detail of the textbook.
+Section 11.4 Assessment is functional: ten mixed checks, a saved latest-attempt report, and concept-specific review links. Assessment evidence is saved separately from lesson scores. Rutherford’s Atom in Section 11.1 is now functional, with a qualitative scattering explorer. Energy and Light is also functional, including a wave/amplitude explorer and numerical practice. Emission of Energy by Atoms is also functional, with an illustrative level/spectrum explorer and energy-gap practice. Section 11.1 Assessment is functional, with conceptual questions, three calculations, and targeted review recommendations. The Energy Levels of Hydrogen and The Bohr Model of the Atom are functional as two short linked lessons. The remaining topics in Sections 11.2–11.3 remain navigation metadata, not completed lessons. The plan completes the listed course topics with original supplemental teaching; it does not reproduce every detail of the textbook.
 
 ## Rules for each update
 
@@ -46,7 +46,7 @@ Build a separate short mixed assessment on Rutherford's evidence, light relation
 
 Done when: completion does not falsely mark every concept mastered, and review recommendations are actionable.
 
-### 6. Section 11.2 — Hydrogen Energy Levels and the Bohr Model
+### 6. Section 11.2 — Hydrogen Energy Levels and the Bohr Model — completed
 
 Implement these as two short linked lessons, one update at a time. Cover allowed levels, ground/excited states, transitions, ionization, and hydrogen's line spectrum. Use a constrained transition selector. Explain the limits of Bohr's circular-path picture and its one-electron treatment. Do not draw hydrogen levels as equally spaced. Add energy arithmetic only after qualitative reasoning works.
 
@@ -88,4 +88,4 @@ Done when: all 15 listed Chapter 11 topics have functional lessons/assessments, 
 
 ## Implementation order
 
-Milestone 1 is complete. Milestone 2 is complete. Milestone 3 is complete. Milestone 4 is complete. Milestone 5 is complete. Start milestone 6 next: The Energy Levels of Hydrogen, followed in a separate update by The Bohr Model of the Atom. Then continue through 11.1, 11.2, and 11.3 in order. Milestones containing multiple lessons or an assessment deliberately span separate updates. Revisit scope after each milestone using actual student misconceptions and course expectations, keeping optional content distinct from required mastery evidence.
+Milestone 1 is complete. Milestone 2 is complete. Milestone 3 is complete. Milestone 4 is complete. Milestone 5 is complete. Milestone 6 is complete. Start milestone 7 next: The Wave Mechanical Model of the Atom, followed by Section 11.2 Assessment. Then continue through 11.1, 11.2, and 11.3 in order. Milestones containing multiple lessons or an assessment deliberately span separate updates. Revisit scope after each milestone using actual student misconceptions and course expectations, keeping optional content distinct from required mastery evidence.

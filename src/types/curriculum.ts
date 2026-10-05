@@ -52,7 +52,12 @@ export type LessonVisual =
 export type LessonStep =
   | {
       id: string;
-      kind: "scattering-explorer" | "wave-explorer" | "emission-explorer";
+      kind:
+        | "scattering-explorer"
+        | "wave-explorer"
+        | "emission-explorer"
+        | "hydrogen-explorer"
+        | "bohr-explorer";
       title: string;
       text: string;
       continueLabel?: string;
