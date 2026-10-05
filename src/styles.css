@@ -1743,3 +1743,32 @@ footer {
 .shape-nucleus {
   fill: #ffd695;
 }
+
+.energy-comparison {
+  margin: 1.5rem 0;
+}
+.energy-comparison svg {
+  width: 100%;
+  max-width: 480px;
+  display: block;
+  margin: auto;
+}
+.energy-comparison text {
+  fill: #e4eafd;
+  font-size: 18px;
+}
+.energy-axis {
+  fill: none;
+  stroke: #8d9dbd;
+  stroke-width: 2;
+}
+.energy-lines {
+  stroke: #c0b4ff;
+  stroke-width: 4;
+}
+.capacity-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}

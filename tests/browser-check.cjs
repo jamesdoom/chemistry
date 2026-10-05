@@ -21,7 +21,7 @@ const { chromium } = require(
       await page
         .getByText("Not started · Coming later", { exact: true })
         .count(),
-      2,
+      1,
     );
     await page
       .getByRole("link", { name: /Electron Arrangements in the First/ })

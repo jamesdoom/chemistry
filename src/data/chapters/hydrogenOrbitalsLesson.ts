@@ -139,6 +139,10 @@ export const hydrogenOrbitalsLesson: Lesson = {
   summary:
     "A level contains sublevels, and each sublevel contains individual orbitals. s has one spherical orbital; p has three two-lobed orbitals with different orientations. Boxes count orbitals, arrows count electrons, and shape drawings describe probability rather than paths.",
   completionActions: [
+    {
+      label: "Explore multi-electron atoms →",
+      to: "/lessons/further-development",
+    },
     { label: "Connect to electron arrangements →", to: "/lessons/first-18" },
     { label: "Practice filling orbital boxes →", to: "/practice/orbitals" },
   ],

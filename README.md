@@ -86,7 +86,7 @@ Browser scripts use the bundled Playwright runtime on this machine. Elsewhere, s
 
 ## Intentional scope
 
-Three Section 11.4 lessons and the orbital exercise set are functional. Sections 11.1 and 11.2, their assessments, and the Section 11.4 Assessment are functional; Section 11.3 now starts with Hydrogen Orbitals. Further Development and the Section 11.3 Assessment remain planned. Orbital exercises support neutral ground-state atoms H–Ar; ions, excited states, and heavier atoms are outside scope. No drag-and-drop, adaptive algorithm, streaks, achievements, AI, authentication, or backend. BrowserRouter hosting requires a fallback to index.html for deep links.
+Three Section 11.4 lessons and the orbital exercise set are functional. Sections 11.1 and 11.2, their assessments, and the Section 11.4 Assessment are functional; Section 11.3 now starts with Hydrogen Orbitals. Further Development is functional; the Section 11.3 Assessment remains planned. Orbital exercises support neutral ground-state atoms H–Ar; ions, excited states, and heavier atoms are outside scope. No drag-and-drop, adaptive algorithm, streaks, achievements, AI, authentication, or backend. BrowserRouter hosting requires a fallback to index.html for deep links.
 
 The best next step is the mixed Section 11.4 Assessment. See [the Chapter 11 completion plan](docs/chapter-11-roadmap.md) for the ordered remaining updates.
 
@@ -140,3 +140,8 @@ Two short lessons at `/lessons/hydrogen-levels` and `/lessons/bohr-model` use st
 ### Hydrogen Orbitals
 
 `/lessons/hydrogen-orbitals` introduces level → sublevel → orbital, counts for n = 1–3, spherical s shapes and three p orientations, and their connection to existing occupancy boxes. Original SVG sketches are qualitative 3D projections: boundaries are not walls, two p lobes are one orbital, and higher-s radial nodes are omitted. The explorer compares states rather than simulating transitions. The basic isolated-hydrogen model has equal energies for orbitals sharing n; this is distinguished from many-electron filling order. Four practice checks use existing hints, targeted feedback, and local mastery under stable topic `11.3-0`. No progress schema changes. Science reference: [OpenStax: Development of Quantum Theory](https://openstax.org/books/chemistry-2e/pages/6-3-development-of-quantum-theory). Detailed d/f shapes and nodes remain outside this update.
+
+
+### Further Development
+
+`/lessons/further-development` compares hydrogen and multi-electron n = 2 energies, introduces repulsion, shielding and penetration, distinguishes intrinsic spin from motion, and connects Pauli/Hund/Aufbau to occupancy. The explorer derives s/p/d/f capacities (2/6/10/14) from 1/3/5/7 orbitals and contrasts opposite/same spin pairs in one orbital. The energy picture is qualitative, not measured gaps or a universal ordering chart. A sulfur worked example and five original checks retain neutral ground-state H–Ar configuration scope. No supplied course requirement establishes a need for heavier-element configurations; d/f capacity checks do not extend the filling engine. Lesson evidence uses stable topic `11.3-1` and the existing localStorage schema. Science reference: [OpenStax: Electronic Structure of Atoms](https://openstax.org/books/chemistry-2e/pages/6-4-electronic-structure-of-atoms-electron-configurations). Next: Section 11.3 Assessment.
