@@ -30,9 +30,12 @@ export interface PracticeQuestion {
   difficulty: "introductory" | "standard";
   inputPlaceholder?: string;
   fallbackFeedback?: string;
+  choices?: { value: string; label: string }[];
 }
 export type LessonVisual =
-  { kind: "oxygen-orbitals" } | { kind: "valence"; atomicNumber: number };
+  | { kind: "oxygen-orbitals" }
+  | { kind: "valence"; atomicNumber: number }
+  | { kind: "trend-comparison"; comparisonId: string };
 export type LessonStep =
   | {
       id: string;
@@ -67,6 +70,15 @@ export type LessonStep =
       text: string;
       initialAtomicNumber: number;
       requiredAtomicNumbers: number[];
+      continueLabel?: string;
+    }
+  | {
+      id: string;
+      kind: "trend-explorer";
+      title: string;
+      text: string;
+      initialComparisonId: string;
+      requiredComparisonIds: string[];
       continueLabel?: string;
     }
   | {

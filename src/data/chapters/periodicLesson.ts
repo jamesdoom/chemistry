@@ -185,6 +185,10 @@ export const periodicLesson: Lesson = {
   summary:
     "Outer energy level → period. Valence-electron pattern → main-group column. You can now read an atom’s configuration as a clue to its location.",
   completionActions: [
+    {
+      label: "Explore atomic size and ionization energy →",
+      to: "/lessons/atomic-trends",
+    },
     { label: "Review electron arrangements →", to: "/lessons/first-18" },
   ],
   steps: [

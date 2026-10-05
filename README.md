@@ -24,7 +24,8 @@ On this machine the default npm launcher is broken. Use this equivalent PowerShe
 
 - `src/types/`: curriculum, orbital exercise, and student progress models. Lesson steps use a discriminated union.
 - `src/data/chapters/chapter11.ts`: Chapter → Section → Topic navigation metadata and a Lesson registry. Topics refer to lessons by stable IDs.
-- `src/data/chapters/periodicLesson.ts`: original valence-electron/periodic-table lesson with explanations, configurable visuals, and six practice questions.
+- `src/data/chapters/periodicLesson.ts`: valence-electron/periodic-table lesson with configurable visuals and six questions.
+- `src/data/chapters/trendsLesson.ts` and `src/data/atomicTrends.ts`: atomic-property lesson, qualitative comparisons, ionization exceptions, and seven questions.
 - `src/data/periodicTable.ts` and `src/utils/atomicProperties.ts`: first-18 table metadata and derived periods, main-group columns, and valence counts.
 - `src/data/practice/orbitals.ts`: neutral-atom exercises (H–Ar), sublevel definitions, and rule guides.
 - `src/components/`: learning visuals, lesson practice, interactive orbital board, progressive help, and progress meters.
@@ -42,11 +43,11 @@ Progress is stored on this browser/device under `orbital.progress.v1`. It record
 
 Topic mastery = earned evidence / total active practice questions, rounded to a percentage. Correct without hints earns 1; correct with hints earns 0.5; unanswered/incorrect earns 0. A fresh correct review without hints can improve evidence. Incorrect attempts without hints do not reduce the eventual independent score. The best evidence is retained. This is an MVP indicator, not a validated measure of long-term mastery.
 
-Electron arrangements has 21 practice items: 3 lesson questions and 18 orbital diagrams. Electron Configurations and the Periodic Table is a separate topic with six questions and separate mastery. Introducing these new items can lower previously displayed percentages; existing successful results and XP are preserved. Only questions in the active registries count. Each newly solved question awards 10 XP once.
+Electron arrangements has 21 practice items: 3 lesson questions and 18 orbital diagrams. Electron Configurations and the Periodic Table has six questions, and Atomic Properties has seven. Each topic has separate mastery. Introducing these new items can lower previously displayed percentages; existing successful results and XP are preserved. Only questions in the active registries count. Each newly solved question awards 10 XP once.
 
 States: NOT_STARTED (no activity), LEARNING (steps completed), PRACTICING (attempts/evidence), MASTERED (80% or higher). Completing a supported lesson and mastering a topic are separate outcomes.
 
-Chapter mastery averages all 15 listed topics; topics without practice count as zero. The available lesson progress meter measures the 16 steps across both implemented lessons. Each lesson also has its own completion indicator. Continue Learning resumes an unfinished current lesson or recommends the next available lesson. Unavailable sections are never marked complete. Chapter mastery can currently reach only 13% because the other topics are unavailable.
+Chapter mastery averages all 15 listed topics; topics without practice count as zero. The available lesson progress meter measures the 29 steps across all three implemented lessons. Each lesson also has its own completion indicator. Continue Learning resumes an unfinished current lesson or recommends the next available lesson. Unavailable sections are never marked complete. Chapter mastery can currently reach only 20% because the other topics are unavailable.
 
 ## Orbital filling practice
 
@@ -62,7 +63,7 @@ Results and completed activities persist with the existing localStorage schema. 
 
 1. Add a Topic with stable `id` and `lessonId` to a section.
 2. Create a Lesson with matching ID, topicId, subtitle, summary, optional completionActions, and typed steps.
-3. Add it to the lesson registry. Practice steps contain prompt, answer, explanation, hints, misconceptionFeedback, workedSolution, difficulty, and topicId.
+3. Add it to the lesson registry. Practice steps contain prompt, answer, explanation, hints, misconceptionFeedback, workedSolution, difficulty, and topicId, with optional radio choices and input/fallback text.
 4. Reuse the existing LessonPage renderer. Explanation steps store progressively simpler explanation levels and optional concept chains. Visual and example steps choose a typed illustration; periodic-table steps provide exploration targets. Continue-button labels and fallback question feedback are content data.
 5. Question counts update automatically from the registered content. Adding new step kinds requires a typed renderer branch.
 
@@ -76,20 +77,29 @@ With Vite running on 127.0.0.1:5173:
 node tests/browser-check.cjs
 node tests/orbital-browser-check.cjs
 node tests/periodic-browser-check.cjs
+node tests/trends-browser-check.cjs
 ```
 
-The first script verifies the original lesson flow and persistence. The second verifies orbital diagnostics, valid alternatives, keyboard controls, progressive hints, supported/independent mastery, atom changes, XP deduplication, refresh, and responsive widths of 768, 390, and 320 pixels. The third checks the new lesson, helium’s exception, table exploration, targeted feedback, independent topic progress, saved earlier results, and mid-lesson resume. All three capture console/page errors and use isolated temporary browser contexts.
+The first script verifies the original lesson flow and persistence. The second verifies orbital diagnostics, valid alternatives, keyboard controls, progressive hints, supported/independent mastery, atom changes, XP deduplication, refresh, and responsive widths of 768, 390, and 320 pixels. The third checks the new lesson, helium’s exception, table exploration, targeted feedback, independent topic progress, saved earlier results, and mid-lesson resume. The fourth checks the atomic-property lesson, qualitative diagrams, ionization process, comparison exploration, radio questions, complete help path, mastery, and resume. All four capture console/page errors and use isolated temporary browser contexts.
 
 Browser scripts use the bundled Playwright runtime on this machine. Elsewhere, set PLAYWRIGHT_MODULE to an installed Playwright module path; Chrome must be available.
 
 ## Intentional scope
 
-Two Section 11.4 lessons and the orbital exercise set are functional. Sections 11.1–11.3 and the remaining 11.4 topics are navigation metadata. Orbital exercises support neutral ground-state atoms H–Ar; ions, excited states, and heavier atoms are outside scope. No drag-and-drop, adaptive algorithm, streaks, achievements, AI, authentication, or backend. BrowserRouter hosting requires a fallback to index.html for deep links.
+Three Section 11.4 lessons and the orbital exercise set are functional. Sections 11.1–11.3 and the Section 11.4 Assessment remain navigation metadata. Orbital exercises support neutral ground-state atoms H–Ar; ions, excited states, and heavier atoms are outside scope. No drag-and-drop, adaptive algorithm, streaks, achievements, AI, authentication, or backend. BrowserRouter hosting requires a fallback to index.html for deep links.
 
-The best next step is Atomic Properties and the Periodic Table: an original visual lesson on atomic size and ionization energy, connected to occupied levels, nuclear charge, and shielding.
+The best next step is the mixed Section 11.4 Assessment. See [the Chapter 11 completion plan](docs/chapter-11-roadmap.md) for the ordered remaining updates.
 
 ## Valence electrons and periodic-table lesson
 
 Open `/lessons/periodic-table` from the chapter page, dashboard, or first lesson’s completion screen. The lesson follows concept → labeled outer-electron visual → stepped oxygen example → interactive first-18 table → guided nitrogen/oxygen/neon practice → three magnesium mastery checks. Modern groups 1, 2, and 13–18 are shown in their relative order; groups 3–12 are explicitly omitted. Students explore nitrogen, oxygen, and neon before continuing. Helium is explained as the two-valence-electron exception in group 18. The rules are limited to neutral ground-state H–Ar, not transition metals.
 
 Completed steps, question results, and XP persist using the existing schema. The new topic does not change the original topic’s mastery denominator or remove earlier records. Exploration selections are temporary; an unfinished exploration restarts on refresh, while completed steps and answered practice resume as before. Overall lesson progress may drop when new lesson steps become available; this does not erase previous completion.
+
+## Atomic size and first ionization energy
+
+Open `/lessons/atomic-trends` from the dashboard, chapter roadmap, or periodic-table lesson completion screen. The original lesson connects occupied levels, shielding, and nuclear attraction to atomic size and first ionization energy. It contains two worked examples, qualitative cloud sketches, outer-orbital diagrams, six explorable comparisons, four guided questions, and three mastery checks. It explains first ionization as an energy input for a neutral isolated gaseous atom and explicitly includes the Be/B and N/O exceptions. Practice transfers the sublevel exception to Mg/Al.
+
+Cloud sketches have no measured radii or physical scale; they show qualitative comparisons and have diffuse edges rather than orbital paths. Removal equations are neutral atom + energy → singly positive ion + electron. The comparison explorer requires five views, including N/O, before continuing; Be/B is additionally available. Exploration choices and open equations are temporary; scored results and completed steps persist. The seven new results use the existing localStorage schema under the separate atomic-properties topic. Earlier topic denominators and records remain unchanged. Adding the third lesson increases available lesson steps, so aggregate completion percentages can decrease without losing prior work.
+
+Scientific trend/exception facts were checked against [OpenStax Chemistry 2e, Periodic Variations in Element Properties](https://openstax.org/books/chemistry-2e/pages/6-5-periodic-variations-in-element-properties). No source prose, questions, or diagrams were copied. The lesson intentionally covers atomic size and first ionization energy, not a numerical radius database, electron affinity, or all ionic-size/metallic-property details. Those can be scoped during the Chapter 11 content audit if the course requires them.

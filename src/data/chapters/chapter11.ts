@@ -1,5 +1,6 @@
 import type { Chapter, Lesson, PracticeQuestion } from "../../types/curriculum";
 import { periodicLesson } from "./periodicLesson.ts";
+import { trendsLesson } from "./trendsLesson.ts";
 export const topicId = "electron-arrangements";
 export const chapter11: Chapter = {
   id: "chapter-11",
@@ -57,6 +58,7 @@ export const chapter11: Chapter = {
         {
           id: "atomic-properties",
           title: "Atomic Properties and the Periodic Table",
+          lessonId: "atomic-trends",
         },
         { id: "11.4-assessment", title: "Section 11.4 Assessment" },
       ],
@@ -240,4 +242,4 @@ export const firstLesson: Lesson = {
     },
   ],
 };
-export const lessons = [firstLesson, periodicLesson];
+export const lessons = [firstLesson, periodicLesson, trendsLesson];

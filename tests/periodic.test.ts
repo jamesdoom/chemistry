@@ -91,7 +91,7 @@ test("continue learning chooses the unfinished current lesson or next available 
   assert.equal(nextLearningLesson(progress).id, "periodic-table");
   progress.topics[progress.currentTopicId]!.completedSteps =
     lessons[1]!.steps.map((s) => s.id);
-  assert.equal(nextLearningLesson(progress).id, "periodic-table");
+  assert.equal(nextLearningLesson(progress).id, "atomic-trends");
   progress.currentTopicId = "not-in-this-release";
-  assert.equal(nextLearningLesson(progress).id, "first-18");
+  assert.equal(nextLearningLesson(progress).id, "atomic-trends");
 });

@@ -1266,3 +1266,203 @@ footer {
     padding: 12px;
   }
 }
+/* Atomic-property comparisons are qualitative, not numerical measurements. */
+.trend-atom-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.trend-comparison {
+  margin: 22px 0;
+}
+.trend-atom-card {
+  min-width: 0;
+  background: #121c2b;
+  border: 1px solid #526078;
+  border-radius: 12px;
+  padding: 20px;
+}
+.trend-atom-heading {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.trend-atom-heading strong {
+  font-size: 31px;
+  color: #ddd5ff;
+}
+.trend-atom-heading span {
+  font-size: 14px;
+  color: #d1dbef;
+}
+.trend-atom-card svg {
+  width: 100%;
+  max-height: 165px;
+  display: block;
+}
+.trend-result {
+  display: block;
+  border: 1px solid #777096;
+  border-radius: 7px;
+  background: #2e2a46;
+  color: #e0d8ff;
+  padding: 8px 10px;
+  font-size: 12px;
+  margin: 12px 0;
+}
+.trend-facts {
+  margin: 15px 0 0;
+  font-size: 12px;
+  color: #c7d2e7;
+}
+.trend-facts > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 8px 0;
+}
+.trend-facts dd {
+  font-weight: 700;
+  margin: 0;
+  color: #edf1fb;
+}
+.trend-comparison figcaption {
+  font-size: 12px;
+  color: #bcc7dc;
+  margin: 18px 0;
+}
+.trend-reason {
+  padding: 18px;
+  background: #292f45;
+  border-left: 3px solid #b4abf5;
+  border-radius: 6px;
+  color: #e1dbfa;
+}
+.trend-reason p {
+  font-size: 14px;
+  margin: 10px 0 0;
+}
+.trend-reason .small {
+  font-size: 12px;
+}
+.trend-outer-label {
+  font-size: 11px;
+  margin: 12px 0 8px;
+}
+.trend-config {
+  font-size: 23px;
+  color: #ded7ff;
+  margin: 0 0 16px;
+}
+.trend-config sup {
+  font-size: 14px;
+}
+.trend-outer-orbitals .orbital {
+  width: 32px;
+  height: 34px;
+  font-size: 22px;
+}
+.trend-outer-orbitals .orbital-row {
+  gap: 5px;
+}
+.trend-explorer > label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.trend-explorer select {
+  background: #121c2b;
+  color: #edf1fa;
+  border: 1px solid #65718a;
+  border-radius: 9px;
+  padding: 12px;
+  font: inherit;
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+.trend-explorer select:focus-visible {
+  outline: 3px solid #b5cbff;
+  outline-offset: 4px;
+}
+.ionization-equation {
+  font-size: 13px;
+  color: #e6dfff;
+  margin: 20px 0 0;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.ionization-equation sup {
+  font-size: 10px;
+}
+.choice-fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  min-width: 0;
+}
+.choice-fieldset legend {
+  font-size: 13px;
+  color: #bfc9dc;
+  padding: 0;
+  margin-bottom: 10px;
+}
+.practice .choice-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  padding: 13px;
+  margin: 0 0 10px;
+  border: 1px solid #5c6b84;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.practice .choice-option:has(input:checked) {
+  border-color: #bbb0ff;
+  background: #2d2944;
+}
+.practice .choice-option input {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  margin: 3px 0 0;
+  accent-color: #b7afff;
+}
+.choice-fieldset:disabled .choice-option {
+  cursor: default;
+}
+.choice-fieldset:disabled .choice-option span {
+  color: #bcc7db;
+}
+@media (max-width: 950px) {
+  .trend-atom-pair {
+    grid-template-columns: 1fr;
+  }
+  .trend-atom-card svg {
+    max-height: 150px;
+  }
+  .trend-atom-card {
+    padding: 18px;
+  }
+  .trend-reason {
+    padding: 16px;
+  }
+}
+@media (max-width: 440px) {
+  .trend-explorer select {
+    font-size: 13px;
+    padding: 10px;
+  }
+  .trend-atom-heading strong {
+    font-size: 28px;
+  }
+  .practice .choice-option {
+    font-size: 14px;
+    padding: 12px;
+  }
+}

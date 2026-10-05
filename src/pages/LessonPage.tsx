@@ -1,22 +1,35 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { lessons } from "../data/chapters/chapter11";
+import { chapter11, lessons } from "../data/chapters/chapter11";
 import { useProgress } from "../context/ProgressContext";
 import { OrbitalVisual } from "../components/learning/OrbitalVisual";
 import { ValenceVisual } from "../components/learning/ValenceVisual";
 import { PeriodicExplorer } from "../components/learning/PeriodicExplorer";
+import { TrendComparisonVisual } from "../components/learning/TrendComparisonVisual";
+import { TrendExplorer } from "../components/learning/TrendExplorer";
 import { Practice } from "../components/practice/Practice";
 import { Meter } from "../components/progress/Meter";
 import { topicMastery } from "../utils/learning";
 import type { Lesson, LessonVisual } from "../types/curriculum";
 function VisualContent({ visual }: { visual: LessonVisual }) {
-  return visual.kind === "oxygen-orbitals" ? (
-    <OrbitalVisual />
-  ) : (
-    <ValenceVisual atomicNumber={visual.atomicNumber} />
-  );
+  switch (visual.kind) {
+    case "oxygen-orbitals":
+      return <OrbitalVisual />;
+    case "valence":
+      return <ValenceVisual atomicNumber={visual.atomicNumber} />;
+    case "trend-comparison":
+      return (
+        <TrendComparisonVisual
+          key={visual.comparisonId}
+          comparisonId={visual.comparisonId}
+        />
+      );
+  }
 }
 function LearningExperience({ lesson }: { lesson: Lesson }) {
+  const section = chapter11.sections.find((item) =>
+    item.topics.some((topic) => topic.id === lesson.topicId),
+  );
   const { progress, completeStep } = useProgress();
   const saved = progress.topics[lesson.topicId];
   const [index, setIndex] = useState(() => {
@@ -45,7 +58,9 @@ function LearningExperience({ lesson }: { lesson: Lesson }) {
       <Link className="breadcrumb" to="/chapters/chapter-11">
         ← Chapter 11 roadmap
       </Link>
-      <div className="eyebrow">LEARN / SECTION 11.4</div>
+      <div className="eyebrow">
+        LEARN / {section ? `SECTION ${section.number}` : "CHAPTER 11"}
+      </div>
       <h1 className="lesson-title">{lesson.title}</h1>
       <p className="muted">{lesson.subtitle}</p>
       <div className="lesson-layout">
@@ -92,7 +107,8 @@ function LearningExperience({ lesson }: { lesson: Lesson }) {
             <>
               <div className="eyebrow">
                 STEP {index + 1} OF {lesson.steps.length} ·{" "}
-                {step.kind === "periodic-table"
+                {step.kind === "periodic-table" ||
+                step.kind === "trend-explorer"
                   ? "Explore"
                   : step.kind === "checkpoint"
                     ? "Mastery check"
@@ -177,6 +193,18 @@ function LearningExperience({ lesson }: { lesson: Lesson }) {
                     key={step.id}
                     initialAtomicNumber={step.initialAtomicNumber}
                     requiredAtomicNumbers={step.requiredAtomicNumbers}
+                    onComplete={advance}
+                    continueLabel={step.continueLabel ?? "Continue →"}
+                  />
+                </>
+              )}
+              {step.kind === "trend-explorer" && (
+                <>
+                  <p className="lesson-copy">{step.text}</p>
+                  <TrendExplorer
+                    key={step.id}
+                    initialComparisonId={step.initialComparisonId}
+                    requiredComparisonIds={step.requiredComparisonIds}
                     onComplete={advance}
                     continueLabel={step.continueLabel ?? "Continue →"}
                   />

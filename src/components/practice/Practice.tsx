@@ -52,15 +52,35 @@ export function Practice({
           check();
         }}
       >
-        <label htmlFor={question.id}>Your answer</label>
-        <input
-          id={question.id}
-          autoComplete="off"
-          value={answer}
-          onChange={(e) => setAnswer(e.target.value)}
-          disabled={correct}
-          placeholder={question.inputPlaceholder ?? "Your answer"}
-        />
+        {question.choices ? (
+          <fieldset className="choice-fieldset" disabled={correct}>
+            <legend>Your answer</legend>
+            {question.choices.map((choice) => (
+              <label className="choice-option" key={choice.value}>
+                <input
+                  type="radio"
+                  name={question.id}
+                  value={choice.value}
+                  checked={answer === choice.value}
+                  onChange={() => setAnswer(choice.value)}
+                />
+                <span>{choice.label}</span>
+              </label>
+            ))}
+          </fieldset>
+        ) : (
+          <>
+            <label htmlFor={question.id}>Your answer</label>
+            <input
+              id={question.id}
+              autoComplete="off"
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+              disabled={correct}
+              placeholder={question.inputPlaceholder ?? "Your answer"}
+            />
+          </>
+        )}
         <button className="primary" disabled={!answer.trim() || correct}>
           Check answer
         </button>
@@ -99,8 +119,14 @@ export function Practice({
             {help === 3 && <p>Finish the last step, then check your answer.</p>}
             {help === 4 && (
               <p>
-                Solution: <strong>{question.answer}</strong>. Enter it to finish
-                with support.
+                Solution:{" "}
+                <strong>
+                  {question.choices?.find(
+                    (choice) => choice.value === question.answer,
+                  )?.label ?? question.answer}
+                </strong>
+                . {question.choices ? "Select it" : "Enter it"} to finish with
+                support.
               </p>
             )}
           </div>

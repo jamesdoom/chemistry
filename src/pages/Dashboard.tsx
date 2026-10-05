@@ -6,6 +6,9 @@ import { Meter } from "../components/progress/Meter";
 export function Dashboard() {
   const { progress } = useProgress();
   const current = nextLearningLesson(progress);
+  const currentSection = chapter11.sections.find((section) =>
+    section.topics.some((topic) => topic.id === current.topicId),
+  );
   const allTopics = chapter11.sections.flatMap((s) => s.topics);
   const chapterMastery = Math.round(
     allTopics.reduce(
@@ -62,7 +65,10 @@ export function Dashboard() {
             {currentComplete ? "Review current lesson" : "Continue learning"}{" "}
             <span>→</span>
           </Link>
-          <p className="muted small">Section 11.4 · {current.title}</p>
+          <p className="muted small">
+            {currentSection ? `Section ${currentSection.number}` : "Chapter 11"}{" "}
+            · {current.title}
+          </p>
         </section>
         <aside className="card focus-card">
           <div className="eyebrow">YOUR NEXT SMALL STEP</div>
@@ -96,18 +102,22 @@ export function Dashboard() {
       <div className="roadmap">
         {chapter11.sections.map((section) => (
           <article
-            className={`card roadmap-card ${section.id === "11.4" ? "current" : ""}`}
+            className={`card roadmap-card ${section.id === currentSection?.id ? "current" : ""}`}
             key={section.id}
           >
             <span className="section-number">{section.number}</span>
             <h3>{section.title}</h3>
             <p className="muted">
-              {section.id === "11.4"
-                ? `Start here · ${section.topics.filter((t) => t.lessonId).length} lessons available`
+              {section.topics.some((topic) => topic.lessonId)
+                ? `${section.id === currentSection?.id ? "Current section" : "Available"} · ${section.topics.filter((t) => t.lessonId).length} lessons available`
                 : "Not started · Lessons coming later"}
             </p>
-            {section.id === "11.4" && (
-              <Link to={`/lessons/${current.id}`}>Open lesson →</Link>
+            {section.topics.some((topic) => topic.lessonId) && (
+              <Link
+                to={`/lessons/${section.id === currentSection?.id ? current.id : section.topics.find((topic) => topic.lessonId)?.lessonId}`}
+              >
+                Open lesson →
+              </Link>
             )}
           </article>
         ))}
