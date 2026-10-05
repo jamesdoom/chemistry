@@ -58,7 +58,8 @@ export type LessonStep =
         | "emission-explorer"
         | "hydrogen-explorer"
         | "bohr-explorer"
-        | "probability-explorer";
+        | "probability-explorer"
+        | "orbital-shapes-explorer";
       title: string;
       text: string;
       continueLabel?: string;

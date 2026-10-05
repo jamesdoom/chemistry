@@ -1689,3 +1689,57 @@ footer {
   line-height: 1.6;
   color: #a8b8cd;
 }
+
+.orbital-shapes-explorer select {
+  display: block;
+  margin: 0.6rem 0 1rem;
+  padding: 0.7rem;
+  background: #172136;
+  color: #f0f3ff;
+  border: 1px solid #7584a7;
+  border-radius: 0.5rem;
+}
+.shape-boxes {
+  display: grid;
+  gap: 0.8rem;
+  margin: 1.5rem 0;
+}
+.shape-boxes .orbital-row {
+  flex-wrap: wrap;
+}
+.shape-boxes button.orbital {
+  cursor: pointer;
+  color: inherit;
+  background: #172136;
+}
+.shape-boxes button[aria-pressed="true"] {
+  border-color: #c0b4ff;
+  background: #3d3260;
+}
+.orbital-shape-figure {
+  margin: 1.5rem 0;
+}
+.orbital-shape-figure svg {
+  display: block;
+  width: 100%;
+  max-width: 440px;
+  margin: auto;
+}
+.orbital-shape-figure ellipse,
+.orbital-shape-figure .s-shape {
+  fill: #a99bee55;
+  stroke: #c0b4ff;
+  stroke-width: 2;
+}
+.shape-axes path {
+  stroke: #8d9dbd;
+  stroke-width: 1;
+  stroke-dasharray: 5 5;
+}
+.shape-axes text {
+  fill: #e4eafd;
+  font-size: 18px;
+}
+.shape-nucleus {
+  fill: #ffd695;
+}

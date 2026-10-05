@@ -86,7 +86,7 @@ Browser scripts use the bundled Playwright runtime on this machine. Elsewhere, s
 
 ## Intentional scope
 
-Three Section 11.4 lessons and the orbital exercise set are functional. Sections 11.1–11.3 and the Section 11.4 Assessment remain navigation metadata. Orbital exercises support neutral ground-state atoms H–Ar; ions, excited states, and heavier atoms are outside scope. No drag-and-drop, adaptive algorithm, streaks, achievements, AI, authentication, or backend. BrowserRouter hosting requires a fallback to index.html for deep links.
+Three Section 11.4 lessons and the orbital exercise set are functional. Sections 11.1 and 11.2, their assessments, and the Section 11.4 Assessment are functional; Section 11.3 now starts with Hydrogen Orbitals. Further Development and the Section 11.3 Assessment remain planned. Orbital exercises support neutral ground-state atoms H–Ar; ions, excited states, and heavier atoms are outside scope. No drag-and-drop, adaptive algorithm, streaks, achievements, AI, authentication, or backend. BrowserRouter hosting requires a fallback to index.html for deep links.
 
 The best next step is the mixed Section 11.4 Assessment. See [the Chapter 11 completion plan](docs/chapter-11-roadmap.md) for the ordered remaining updates.
 
@@ -135,3 +135,8 @@ Two short lessons at `/lessons/hydrogen-levels` and `/lessons/bohr-model` use st
 ### Section 11.2 assessment
 
 `/assessments/11.2` is a separately committed update after the wave mechanical lesson. Ten original checks cover hydrogen state/transition/ionization reasoning, one-electron scope, retained quantization, orbitals, independent cloud outcomes, boundaries, probability versus certainty, and a supported hydrogen photon-energy calculation. The existing assessment registry and persistence save it under `11.2-3`. The latest-attempt report links specific review actions to hydrogen levels, Bohr, or wave mechanical lessons; retakes preserve lesson mastery and the Section 11.1/11.4 reports. Numerical answers use the existing number-only parser and 1% tolerance.
+
+
+### Hydrogen Orbitals
+
+`/lessons/hydrogen-orbitals` introduces level → sublevel → orbital, counts for n = 1–3, spherical s shapes and three p orientations, and their connection to existing occupancy boxes. Original SVG sketches are qualitative 3D projections: boundaries are not walls, two p lobes are one orbital, and higher-s radial nodes are omitted. The explorer compares states rather than simulating transitions. The basic isolated-hydrogen model has equal energies for orbitals sharing n; this is distinguished from many-electron filling order. Four practice checks use existing hints, targeted feedback, and local mastery under stable topic `11.3-0`. No progress schema changes. Science reference: [OpenStax: Development of Quantum Theory](https://openstax.org/books/chemistry-2e/pages/6-3-development-of-quantum-theory). Detailed d/f shapes and nodes remain outside this update.

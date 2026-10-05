@@ -7,6 +7,7 @@ import { emissionLesson } from "./emissionLesson.ts";
 import { hydrogenLevelsLesson } from "./hydrogenLevelsLesson.ts";
 import { bohrLesson } from "./bohrLesson.ts";
 import { waveMechanicalLesson } from "./waveMechanicalLesson.ts";
+import { hydrogenOrbitalsLesson } from "./hydrogenOrbitalsLesson.ts";
 export const topicId = "electron-arrangements";
 export const chapter11: Chapter = {
   id: "chapter-11",
@@ -63,7 +64,11 @@ export const chapter11: Chapter = {
         "The Hydrogen Orbitals",
         "The Wave Mechanical Model: Further Development",
         "Section 11.3 Assessment",
-      ].map((title, i) => ({ id: `11.3-${i}`, title })),
+      ].map((title, i) => ({
+        id: `11.3-${i}`,
+        title,
+        ...(i === 0 ? { lessonId: "hydrogen-orbitals" } : {}),
+      })),
     },
     {
       id: "11.4",
@@ -282,4 +287,5 @@ export const lessons = [
   hydrogenLevelsLesson,
   bohrLesson,
   waveMechanicalLesson,
+  hydrogenOrbitalsLesson,
 ];
