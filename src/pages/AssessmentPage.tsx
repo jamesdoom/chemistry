@@ -28,7 +28,10 @@ function AssessmentExperience({ assessment }: { assessment: Assessment }) {
         ← Chapter 11 roadmap
       </Link>
       <div className="eyebrow">
-        CHECK YOUR UNDERSTANDING / SECTION {assessment.sectionNumber}
+        CHECK YOUR UNDERSTANDING /{" "}
+        {assessment.scope === "chapter"
+          ? "CHAPTER 11"
+          : `SECTION ${assessment.sectionNumber}`}
       </div>
       <h1>{assessment.title}</h1>
       <p className="intro">
@@ -102,6 +105,11 @@ function AssessmentExperience({ assessment }: { assessment: Assessment }) {
             >
               Retake assessment
             </button>
+            {assessment.scope === "chapter" && (
+              <Link className="primary action" to="/review/chapter-11">
+                Open your chapter review paths →
+              </Link>
+            )}
             <Link className="primary action" to="/">
               Back to dashboard →
             </Link>

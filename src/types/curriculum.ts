@@ -20,6 +20,7 @@ export interface Hint {
   text: string;
 }
 export interface Assessment {
+  scope?: "chapter";
   id: string;
   title: string;
   sectionNumber: string;

@@ -3,6 +3,7 @@ import { chapter11, lessons } from "../data/chapters/chapter11";
 import { useProgress } from "../context/ProgressContext";
 import { nextLearningLesson, topicMastery } from "../utils/learning";
 import { Meter } from "../components/progress/Meter";
+import { chapterSummary } from "../utils/chapterReview";
 import { assessments } from "../data/assessments";
 export function Dashboard() {
   const { progress } = useProgress();
@@ -10,14 +11,7 @@ export function Dashboard() {
   const currentSection = chapter11.sections.find((section) =>
     section.topics.some((topic) => topic.id === current.topicId),
   );
-  const allTopics = chapter11.sections.flatMap((s) => s.topics);
-  const chapterMastery = Math.round(
-    allTopics.reduce(
-      (sum, topic) =>
-        sum + topicMastery(topic.id, progress.topics[topic.id]).percent,
-      0,
-    ) / allTopics.length,
-  );
+  const chapterMastery = chapterSummary(progress).mastery;
   const totalSteps = lessons.reduce(
     (sum, lesson) => sum + lesson.steps.length,
     0,
@@ -56,7 +50,7 @@ export function Dashboard() {
             atom.
           </p>
           <div className="stats">
-            <Meter label="Chapter mastery" value={chapterMastery} />
+            <Meter label="Chapter lesson mastery" value={chapterMastery} />
             <Meter
               label="Available lesson progress"
               value={Math.round((completedSteps / totalSteps) * 100)}
@@ -100,32 +94,49 @@ export function Dashboard() {
         <h2>Your chapter roadmap</h2>
         <Link to="/chapters/chapter-11">Explore chapter →</Link>
       </div>
-      {assessments.map((assessment) => (
-        <section
-          key={assessment.id}
-          className="card orbital-invitation"
-          aria-label={`Section assessment: ${assessment.sectionNumber}`}
-        >
-          <div>
-            <div className="eyebrow">CONNECT THE SECTION TOPICS</div>
-            <h2>{assessment.title}</h2>
-            <p>
-              {assessment.introduction} {assessment.questions.length} mixed
-              checks with a saved report and review links. Assessment evidence
-              is separate from lesson mastery.
-            </p>
-          </div>
-          <Link
-            className="primary action"
-            to={`/assessments/${assessment.sectionNumber}`}
+      <section
+        className="card orbital-invitation"
+        aria-label="Whole-chapter review"
+      >
+        <div>
+          <h2>Connect Chapter 11</h2>
+          <p>
+            See all 15 topics, check the connected story, and find review paths
+            from your saved work.
+          </p>
+        </div>
+        <Link className="primary action" to="/review/chapter-11">
+          Open chapter review →
+        </Link>
+      </section>
+      {assessments
+        .filter((a) => a.scope !== "chapter")
+        .map((assessment) => (
+          <section
+            key={assessment.id}
+            className="card orbital-invitation"
+            aria-label={`Section assessment: ${assessment.sectionNumber}`}
           >
-            {progress.assessments?.[assessment.id]
-              ? "Resume assessment or view report"
-              : "Open assessment"}{" "}
-            →
-          </Link>
-        </section>
-      ))}
+            <div>
+              <div className="eyebrow">CONNECT THE SECTION TOPICS</div>
+              <h2>{assessment.title}</h2>
+              <p>
+                {assessment.introduction} {assessment.questions.length} mixed
+                checks with a saved report and review links. Assessment evidence
+                is separate from lesson mastery.
+              </p>
+            </div>
+            <Link
+              className="primary action"
+              to={`/assessments/${assessment.sectionNumber}`}
+            >
+              {progress.assessments?.[assessment.id]
+                ? "Resume assessment or view report"
+                : "Open assessment"}{" "}
+              →
+            </Link>
+          </section>
+        ))}
       <div className="roadmap">
         {chapter11.sections.map((section) => (
           <article

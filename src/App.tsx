@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import { useEffect } from "react";
 import { ProgressProvider, useProgress } from "./context/ProgressContext";
+import { ChapterReviewPage } from "./pages/ChapterReviewPage";
 import { Dashboard } from "./pages/Dashboard";
 import { ChapterPage } from "./pages/ChapterPage";
 import { LessonPage } from "./pages/LessonPage";
@@ -50,6 +51,7 @@ function Shell() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/chapters/chapter-11" element={<ChapterPage />} />
+          <Route path="/review/chapter-11" element={<ChapterReviewPage />} />
           <Route path="/lessons/:lessonId" element={<LessonPage />} />
           <Route path="/practice/orbitals" element={<OrbitalPracticePage />} />
           <Route

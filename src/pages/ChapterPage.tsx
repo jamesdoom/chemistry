@@ -16,6 +16,9 @@ export function ChapterPage() {
         Your map from atoms and energy to electron arrangements. Start with the
         available lessons in each section below.
       </p>
+      <Link className="primary action" to="/review/chapter-11">
+        Connect concepts and review weak topics →
+      </Link>
       <div className="chapter-sections">
         {chapter11.sections.map((section) => (
           <section className="card" key={section.id}>

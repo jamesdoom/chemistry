@@ -78,7 +78,7 @@ Combine model interpretation, shapes/orientations, counts/capacities, spin, and 
 
 Done when: the assessment is independently persisted and scientifically consistent with both hydrogen and multi-electron explanations.
 
-### 11. Whole-chapter review and final audit
+### 11. Whole-chapter review and final audit — completed
 
 Add a mixed review connecting light → energy changes → models → orbitals → configurations → periodic properties. Use the transparent mastery calculation for review suggestions, not a new adaptive algorithm. Keep all four section assessments and learning topics visible separately.
 
@@ -88,4 +88,4 @@ Done when: all 15 listed Chapter 11 topics have functional lessons/assessments, 
 
 ## Implementation order
 
-Milestone 1 is complete. Milestone 2 is complete. Milestone 3 is complete. Milestone 4 is complete. Milestone 5 is complete. Milestone 6 is complete. Milestone 7 is complete in two separately committed updates. Milestone 8 is complete. Milestone 9 is complete. Milestone 10 is complete. Next is milestone 11: integrated Chapter 11 review and coverage audit. Milestones containing multiple lessons or an assessment deliberately span separate updates. Revisit scope after each milestone using actual student misconceptions and course expectations, keeping optional content distinct from required mastery evidence.
+Milestone 1 is complete. Milestone 2 is complete. Milestone 3 is complete. Milestone 4 is complete. Milestone 5 is complete. Milestone 6 is complete. Milestone 7 is complete in two separately committed updates. Milestone 8 is complete. Milestone 9 is complete. Milestone 10 is complete. Milestone 11 is complete. All 15 listed entries have functional content and persistent progress; see [the audit](chapter-11-audit.md). Next, run the course with the student and refine content based on observed misunderstandings before expanding beyond Chapter 11. Milestones containing multiple lessons or an assessment deliberately span separate updates. Revisit scope after each milestone using actual student misconceptions and course expectations, keeping optional content distinct from required mastery evidence.
