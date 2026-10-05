@@ -1,6 +1,7 @@
 import type { Chapter, Lesson, PracticeQuestion } from "../../types/curriculum";
 import { periodicLesson } from "./periodicLesson.ts";
 import { trendsLesson } from "./trendsLesson.ts";
+import { rutherfordLesson } from "./rutherfordLesson.ts";
 export const topicId = "electron-arrangements";
 export const chapter11: Chapter = {
   id: "chapter-11",
@@ -16,7 +17,11 @@ export const chapter11: Chapter = {
         "Energy and Light",
         "Emission of Energy by Atoms",
         "Section 11.1 Assessment",
-      ].map((title, i) => ({ id: `11.1-${i}`, title })),
+      ].map((title, i) => ({
+        id: `11.1-${i}`,
+        title,
+        ...(i === 0 ? { lessonId: "rutherford" } : {}),
+      })),
     },
     {
       id: "11.2",
@@ -246,4 +251,9 @@ export const firstLesson: Lesson = {
     },
   ],
 };
-export const lessons = [firstLesson, periodicLesson, trendsLesson];
+export const lessons = [
+  firstLesson,
+  periodicLesson,
+  trendsLesson,
+  rutherfordLesson,
+];

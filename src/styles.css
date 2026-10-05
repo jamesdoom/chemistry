@@ -1365,12 +1365,12 @@ footer {
 .trend-outer-orbitals .orbital-row {
   gap: 5px;
 }
-.trend-explorer > label {
+:is(.trend-explorer, .scattering-explorer) > label {
   display: block;
   font-size: 14px;
   margin-bottom: 10px;
 }
-.trend-explorer select {
+:is(.trend-explorer, .scattering-explorer) select {
   background: #121c2b;
   color: #edf1fa;
   border: 1px solid #65718a;
@@ -1381,7 +1381,7 @@ footer {
   width: 100%;
   min-width: 0;
 }
-.trend-explorer select:focus-visible {
+:is(.trend-explorer, .scattering-explorer) select:focus-visible {
   outline: 3px solid #b5cbff;
   outline-offset: 4px;
 }
@@ -1454,7 +1454,7 @@ footer {
   }
 }
 @media (max-width: 440px) {
-  .trend-explorer select {
+  :is(.trend-explorer, .scattering-explorer) select {
     font-size: 13px;
     padding: 10px;
   }
@@ -1465,4 +1465,43 @@ footer {
     font-size: 14px;
     padding: 12px;
   }
+}
+
+.scattering-figure {
+  margin: 1.5rem 0;
+}
+.scattering-figure svg {
+  width: 100%;
+  max-height: 340px;
+  color: #c0b4ff;
+  background: #101827;
+  border-radius: 16px;
+}
+.scattering-figure text {
+  fill: #d8e1ee;
+  font-size: 15px;
+}
+.scattering-figure .atom-boundary {
+  fill: #162238;
+  stroke: #70839c;
+  stroke-dasharray: 5 7;
+}
+.scattering-nucleus {
+  fill: #f4c66b;
+}
+.scattering-figure .nucleus-sign {
+  fill: #101827;
+  font-weight: bold;
+  font-size: 20px;
+}
+.alpha-path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3;
+}
+.scattering-figure figcaption {
+  color: #a8b8cd;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin-top: 0.75rem;
 }

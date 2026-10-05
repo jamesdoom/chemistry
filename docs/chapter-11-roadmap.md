@@ -8,7 +8,7 @@ Three Section 11.4 learning topics are functional:
 - Electron Configurations and the Periodic Table: valence electrons, groups/periods, a first-18 table, and helium's exception.
 - Atomic Properties and the Periodic Table: size, shielding, nuclear attraction, first ionization energy, and sublevel/pairing exceptions.
 
-Section 11.4 Assessment is functional: ten mixed checks, a saved latest-attempt report, and concept-specific review links. Assessment evidence is saved separately from lesson scores. Sections 11.1–11.3 remain navigation metadata, not completed lessons. The plan completes the listed course topics with original supplemental teaching; it does not reproduce every detail of the textbook.
+Section 11.4 Assessment is functional: ten mixed checks, a saved latest-attempt report, and concept-specific review links. Assessment evidence is saved separately from lesson scores. Rutherford’s Atom in Section 11.1 is now functional, with a qualitative scattering explorer. The remaining topics in Sections 11.1–11.3 remain navigation metadata, not completed lessons. The plan completes the listed course topics with original supplemental teaching; it does not reproduce every detail of the textbook.
 
 ## Rules for each update
 
@@ -22,7 +22,7 @@ Add an original mixed check covering neutral electron counts, configurations, Au
 
 Done when: the assessment is navigable and persisted, feedback points to specific concepts, and existing progress is preserved.
 
-### 2. Section 11.1 — Rutherford's Atom
+### 2. Section 11.1 — Rutherford's Atom — completed
 
 Add an original qualitative scattering activity: most positive alpha particles pass through, some deflect, and very few turn back. Connect observations to mostly empty space and a small, dense, positive nucleus. Separate observations from inferred structure. Explain that this model alone does not account for stable electron arrangements or atomic spectra. Label the activity as qualitative rather than a precise physics simulation.
 
@@ -88,4 +88,4 @@ Done when: all 15 listed Chapter 11 topics have functional lessons/assessments, 
 
 ## Implementation order
 
-Milestone 1 is complete. Start milestone 2 next: Rutherford's Atom. Then continue through 11.1, 11.2, and 11.3 in order. Milestones containing multiple lessons or an assessment deliberately span separate updates. Revisit scope after each milestone using actual student misconceptions and course expectations, keeping optional content distinct from required mastery evidence.
+Milestone 1 is complete. Milestone 2 is complete. Start milestone 3 next: Energy and Light. Then continue through 11.1, 11.2, and 11.3 in order. Milestones containing multiple lessons or an assessment deliberately span separate updates. Revisit scope after each milestone using actual student misconceptions and course expectations, keeping optional content distinct from required mastery evidence.

@@ -45,6 +45,13 @@ export type LessonVisual =
 export type LessonStep =
   | {
       id: string;
+      kind: "scattering-explorer";
+      title: string;
+      text: string;
+      continueLabel?: string;
+    }
+  | {
+      id: string;
       kind: "explanation";
       title: string;
       text: string;

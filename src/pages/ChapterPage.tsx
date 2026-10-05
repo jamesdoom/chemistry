@@ -13,7 +13,7 @@ export function ChapterPage() {
       <h1>{chapter11.title}</h1>
       <p className="intro">
         Your map from atoms and energy to electron arrangements. Start with the
-        available lesson in Section 11.4.
+        available lessons in Sections 11.1 and 11.4.
       </p>
       <div className="chapter-sections">
         {chapter11.sections.map((section) => (
