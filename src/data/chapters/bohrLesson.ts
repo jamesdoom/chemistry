@@ -9,6 +9,10 @@ export const bohrLesson: Lesson = {
     "Bohr’s quantized one-electron model explains hydrogen’s approximate energies and line spectrum. Its circular orbits are model assumptions, not modern orbitals or measured paths. Multi-electron interactions require a more complete treatment.",
   completionActions: [
     {
+      label: "Continue to the Wave Mechanical Model →",
+      to: "/lessons/wave-mechanical",
+    },
+    {
       label: "Review hydrogen’s energy levels →",
       to: "/lessons/hydrogen-levels",
     },

@@ -223,7 +223,7 @@ const { chromium } = require(
       await page
         .getByRole("progressbar", { name: "Available lesson progress" })
         .getAttribute("value"),
-      "24",
+      "21",
     );
     assert.deepEqual(
       await page.evaluate(

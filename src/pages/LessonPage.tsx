@@ -12,6 +12,7 @@ import { WaveExplorer } from "../components/learning/WaveExplorer";
 import { EmissionExplorer } from "../components/learning/EmissionExplorer";
 import { HydrogenExplorer } from "../components/learning/HydrogenExplorer";
 import { BohrExplorer } from "../components/learning/BohrExplorer";
+import { ProbabilityExplorer } from "../components/learning/ProbabilityExplorer";
 import { Practice } from "../components/practice/Practice";
 import { Meter } from "../components/progress/Meter";
 import { topicMastery } from "../utils/learning";
@@ -118,7 +119,8 @@ function LearningExperience({ lesson }: { lesson: Lesson }) {
                 step.kind === "wave-explorer" ||
                 step.kind === "emission-explorer" ||
                 step.kind === "hydrogen-explorer" ||
-                step.kind === "bohr-explorer"
+                step.kind === "bohr-explorer" ||
+                step.kind === "probability-explorer"
                   ? "Explore"
                   : step.kind === "checkpoint"
                     ? "Mastery check"
@@ -267,6 +269,16 @@ function LearningExperience({ lesson }: { lesson: Lesson }) {
                       continueLabel={step.continueLabel ?? "Continue →"}
                     />
                   )}
+                </>
+              )}
+              {step.kind === "probability-explorer" && (
+                <>
+                  <p className="lesson-copy">{step.text}</p>
+                  <ProbabilityExplorer
+                    key={step.id}
+                    onComplete={advance}
+                    continueLabel={step.continueLabel ?? "Continue →"}
+                  />
                 </>
               )}
               {(step.kind === "practice" || step.kind === "checkpoint") && (

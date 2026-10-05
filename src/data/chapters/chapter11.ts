@@ -6,6 +6,7 @@ import { lightLesson } from "./lightLesson.ts";
 import { emissionLesson } from "./emissionLesson.ts";
 import { hydrogenLevelsLesson } from "./hydrogenLevelsLesson.ts";
 import { bohrLesson } from "./bohrLesson.ts";
+import { waveMechanicalLesson } from "./waveMechanicalLesson.ts";
 export const topicId = "electron-arrangements";
 export const chapter11: Chapter = {
   id: "chapter-11",
@@ -49,7 +50,9 @@ export const chapter11: Chapter = {
           ? { lessonId: "hydrogen-levels" }
           : i === 1
             ? { lessonId: "bohr-model" }
-            : {}),
+            : i === 2
+              ? { lessonId: "wave-mechanical" }
+              : {}),
       })),
     },
     {
@@ -278,4 +281,5 @@ export const lessons = [
   emissionLesson,
   hydrogenLevelsLesson,
   bohrLesson,
+  waveMechanicalLesson,
 ];

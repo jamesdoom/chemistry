@@ -57,7 +57,8 @@ export type LessonStep =
         | "wave-explorer"
         | "emission-explorer"
         | "hydrogen-explorer"
-        | "bohr-explorer";
+        | "bohr-explorer"
+        | "probability-explorer";
       title: string;
       text: string;
       continueLabel?: string;
