@@ -1,3 +1,4 @@
+import { DiagramFrame } from "./DiagramFrame";
 import { useState } from "react";
 import { pOrientations, sublevelsForLevel } from "../../data/hydrogenOrbitals";
 
@@ -96,33 +97,35 @@ export function OrbitalShapesExplorer({
         transition or an electron path. Empty boxes still represent orbitals.
       </p>
       <figure className="orbital-shape-figure">
-        <svg
-          viewBox="0 0 400 300"
-          role="img"
-          aria-label={`${selected}: ${isP ? "one orbital with two lobes, oriented along the " + orientation?.id + " axis" : "one spherical s orbital"}. Qualitative three-dimensional sketch.`}
-        >
-          <g className="shape-axes">
-            <path d="M45 150H355 M85 245L315 55 M200 265V35" />
-            <text x="365" y="155">
-              x
-            </text>
-            <text x="325" y="50">
-              y
-            </text>
-            <text x="195" y="25">
-              z
-            </text>
-          </g>
-          {isP ? (
-            <g transform={`rotate(${-orientation!.angle} 200 150)`}>
-              <ellipse cx="150" cy="150" rx="47" ry="27" />
-              <ellipse cx="250" cy="150" rx="47" ry="27" />
+        <DiagramFrame label="Orbital shape and orientation diagram" compact>
+          <svg
+            viewBox="0 0 400 300"
+            role="img"
+            aria-label={`${selected}: ${isP ? "one orbital with two lobes, oriented along the " + orientation?.id + " axis" : "one spherical s orbital"}. Qualitative three-dimensional sketch.`}
+          >
+            <g className="shape-axes">
+              <path d="M45 150H355 M85 245L315 55 M200 265V35" />
+              <text x="365" y="155">
+                x
+              </text>
+              <text x="325" y="50">
+                y
+              </text>
+              <text x="195" y="25">
+                z
+              </text>
             </g>
-          ) : (
-            <circle cx="200" cy="150" r="80" className="s-shape" />
-          )}
-          <circle cx="200" cy="150" r="4" className="shape-nucleus" />
-        </svg>
+            {isP ? (
+              <g transform={`rotate(${-orientation!.angle} 200 150)`}>
+                <ellipse cx="150" cy="150" rx="47" ry="27" />
+                <ellipse cx="250" cy="150" rx="47" ry="27" />
+              </g>
+            ) : (
+              <circle cx="200" cy="150" r="80" className="s-shape" />
+            )}
+            <circle cx="200" cy="150" r="4" className="shape-nucleus" />
+          </svg>
+        </DiagramFrame>
         <figcaption>
           <strong>{selected}</strong> ·{" "}
           {isP

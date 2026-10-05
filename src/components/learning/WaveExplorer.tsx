@@ -1,3 +1,4 @@
+import { DiagramFrame } from "./DiagramFrame";
 import { useState } from "react";
 import { lightProperties } from "../../utils/light";
 export function WaveExplorer({
@@ -55,27 +56,29 @@ export function WaveExplorer({
         }}
       />
       <figure className="wave-figure">
-        <svg
-          viewBox="0 0 520 240"
-          role="img"
-          aria-label={`Electric field versus distance at one instant. Wavelength ${wavelength} nanometers; relative amplitude ${amplitude}.`}
-        >
-          <line x1="20" y1="120" x2="500" y2="120" className="wave-axis" />
-          <path d={path} className="wave-path" />
-          <line
-            x1="20"
-            y1="22"
-            x2={20 + period}
-            y2="22"
-            className="wave-measure"
-          />
-          <text x={20 + period / 2} y="16" textAnchor="middle">
-            λ: crest to crest
-          </text>
-          <text x="260" y="224" textAnchor="middle">
-            Distance → (same scale for every wavelength)
-          </text>
-        </svg>
+        <DiagramFrame label="Light wave diagram">
+          <svg
+            viewBox="0 0 520 240"
+            role="img"
+            aria-label={`Electric field versus distance at one instant. Wavelength ${wavelength} nanometers; relative amplitude ${amplitude}.`}
+          >
+            <line x1="20" y1="120" x2="500" y2="120" className="wave-axis" />
+            <path d={path} className="wave-path" />
+            <line
+              x1="20"
+              y1="22"
+              x2={20 + period}
+              y2="22"
+              className="wave-measure"
+            />
+            <text x={20 + period / 2} y="16" textAnchor="middle">
+              λ: crest to crest
+            </text>
+            <text x="260" y="224" textAnchor="middle">
+              Distance → (same scale for every wavelength)
+            </text>
+          </svg>
+        </DiagramFrame>
         <figcaption>
           A spatial snapshot of an electric field, not a photon’s travel path.
           Frequency counts cycles passing a fixed point each second; it is

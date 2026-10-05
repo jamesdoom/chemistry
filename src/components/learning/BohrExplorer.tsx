@@ -1,3 +1,4 @@
+import { DiagramFrame } from "./DiagramFrame";
 import { useState } from "react";
 import { hydrogenEnergy } from "../../data/hydrogen";
 export function BohrExplorer({
@@ -30,33 +31,35 @@ export function BohrExplorer({
         ))}
       </fieldset>
       <figure className="bohr-figure">
-        <svg
-          viewBox="0 0 520 380"
-          role="img"
-          aria-label={`Historical Bohr picture with three circular allowed orbits. Selected level n ${n}, ${n === 1 ? "ground" : "excited"} state. Circles are model assumptions, not observed trajectories.`}
-        >
-          {[1, 2, 3].map((level) => (
+        <DiagramFrame label="Historical Bohr diagram">
+          <svg
+            viewBox="0 0 520 380"
+            role="img"
+            aria-label={`Historical Bohr picture with three circular allowed orbits. Selected level n ${n}, ${n === 1 ? "ground" : "excited"} state. Circles are model assumptions, not observed trajectories.`}
+          >
+            {[1, 2, 3].map((level) => (
+              <circle
+                key={level}
+                cx="230"
+                cy="190"
+                r={16 * level * level}
+                className={
+                  n === level ? "bohr-orbit selected-orbit" : "bohr-orbit"
+                }
+              />
+            ))}
+            <circle cx="230" cy="190" r="6" className="scattering-nucleus" />
             <circle
-              key={level}
-              cx="230"
+              cx={230 + 16 * n * n}
               cy="190"
-              r={16 * level * level}
-              className={
-                n === level ? "bohr-orbit selected-orbit" : "bohr-orbit"
-              }
+              r="6"
+              className="energy-state"
             />
-          ))}
-          <circle cx="230" cy="190" r="6" className="scattering-nucleus" />
-          <circle
-            cx={230 + 16 * n * n}
-            cy="190"
-            r="6"
-            className="energy-state"
-          />
-          <text x="230" y="366" textAnchor="middle">
-            Historical circular-orbit picture
-          </text>
-        </svg>
+            <text x="230" y="366" textAnchor="middle">
+              Historical circular-orbit picture
+            </text>
+          </svg>
+        </DiagramFrame>
         <figcaption>
           Orbit radii follow the Bohr hydrogen ratio n²; overall size is
           enlarged, and particle sizes are not to scale. The electron marker

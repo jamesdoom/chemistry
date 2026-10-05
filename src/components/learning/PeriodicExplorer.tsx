@@ -26,49 +26,74 @@ export function PeriodicExplorer({
         Columns are groups; rows are periods. Groups 3–12 are omitted because
         they contain none of the first 18 elements.
       </p>
+      <div className="mobile-element-picker">
+        <label htmlFor="periodic-element">Choose an element</label>
+        <select
+          id="periodic-element"
+          value={selected}
+          onChange={(e) => select(Number(e.target.value))}
+        >
+          {periodicAtoms.map((element) => (
+            <option key={element.atomicNumber} value={element.atomicNumber}>
+              {element.atomicNumber} · {element.name} ({element.symbol})
+            </option>
+          ))}
+        </select>
+        <p className="small muted">
+          Swipe the table sideways to compare groups. You can also choose any
+          element above.
+        </p>
+      </div>
       <div
-        className="compact-periodic-table"
-        aria-label="First 18 elements of the periodic table"
+        className="periodic-scroll"
+        role="region"
+        aria-label="Scrollable periodic table"
+        tabIndex={0}
       >
-        <span className="table-corner" aria-hidden="true">
-          P / G
-        </span>
-        {periodicGroups.map((group, index) => (
-          <span
-            className="group-label"
-            key={group}
-            style={{ gridColumn: index + 2, gridRow: 1 }}
-          >
-            {" "}
-            {group}
+        <div
+          className="compact-periodic-table"
+          aria-label="First 18 elements of the periodic table"
+        >
+          <span className="table-corner" aria-hidden="true">
+            P / G
           </span>
-        ))}
-        {[1, 2, 3].map((period) => (
-          <span
-            className="period-label"
-            key={period}
-            style={{ gridColumn: 1, gridRow: period + 1 }}
-          >
-            {period}
-          </span>
-        ))}
-        {periodicAtoms.map((element) => (
-          <button
-            key={element.atomicNumber}
-            type="button"
-            aria-pressed={selected === element.atomicNumber}
-            aria-label={`${element.name}, atomic number ${element.atomicNumber}, period ${element.period}, group ${element.group}`}
-            className="element-button"
-            style={{
-              gridColumn: periodicGroups.indexOf(element.group) + 2,
-              gridRow: element.period + 1,
-            }}
-            onClick={() => select(element.atomicNumber)}
-          >
-            <small>{element.atomicNumber}</small>
-            <strong>{element.symbol}</strong>
-          </button>
-        ))}
+          {periodicGroups.map((group, index) => (
+            <span
+              className="group-label"
+              key={group}
+              style={{ gridColumn: index + 2, gridRow: 1 }}
+            >
+              {" "}
+              {group}
+            </span>
+          ))}
+          {[1, 2, 3].map((period) => (
+            <span
+              className="period-label"
+              key={period}
+              style={{ gridColumn: 1, gridRow: period + 1 }}
+            >
+              {period}
+            </span>
+          ))}
+          {periodicAtoms.map((element) => (
+            <button
+              key={element.atomicNumber}
+              type="button"
+              aria-pressed={selected === element.atomicNumber}
+              aria-label={`${element.name}, atomic number ${element.atomicNumber}, period ${element.period}, group ${element.group}`}
+              className="element-button"
+              style={{
+                gridColumn: periodicGroups.indexOf(element.group) + 2,
+                gridRow: element.period + 1,
+              }}
+              onClick={() => select(element.atomicNumber)}
+            >
+              <small>{element.atomicNumber}</small>
+              <strong>{element.symbol}</strong>
+            </button>
+          ))}
+        </div>
       </div>
       <div className="element-detail" aria-live="polite" aria-atomic="true">
         <h3>

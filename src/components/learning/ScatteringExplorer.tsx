@@ -1,3 +1,4 @@
+import { DiagramFrame } from "./DiagramFrame";
 import { useState } from "react";
 import { scatteringCases } from "../../data/scattering";
 export function ScatteringExplorer({
@@ -30,50 +31,52 @@ export function ScatteringExplorer({
         ))}
       </select>
       <figure className="scattering-figure">
-        <svg
-          viewBox="0 0 520 340"
-          role="img"
-          aria-label={
-            revealed
-              ? `${current.label}: ${current.observation}`
-              : `${current.label}: reveal the path to see the outcome`
-          }
-        >
-          <defs>
-            <marker
-              id="scattering-arrow"
-              viewBox="0 0 10 10"
-              refX="8"
-              refY="5"
-              markerWidth="6"
-              markerHeight="6"
-              orient="auto-start-reverse"
-            >
-              <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" />
-            </marker>
-          </defs>
-          <circle cx="260" cy="176" r="128" className="atom-boundary" />
-          <circle cx="260" cy="176" r="14" className="scattering-nucleus" />
-          <text x="260" y="182" textAnchor="middle" className="nucleus-sign">
-            +
-          </text>
-          <text x="280" y="211">
-            Positive nucleus
-          </text>
-          <text x="260" y="324" textAnchor="middle">
-            Approximate atom region
-          </text>
-          {revealed && (
-            <path
-              d={current.path}
-              className="alpha-path"
-              markerEnd="url(#scattering-arrow)"
-            />
-          )}
-          <text x="18" y="245">
-            Incoming alpha (+)
-          </text>
-        </svg>
+        <DiagramFrame label="Scattering diagram">
+          <svg
+            viewBox="0 0 520 340"
+            role="img"
+            aria-label={
+              revealed
+                ? `${current.label}: ${current.observation}`
+                : `${current.label}: reveal the path to see the outcome`
+            }
+          >
+            <defs>
+              <marker
+                id="scattering-arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="6"
+                markerHeight="6"
+                orient="auto-start-reverse"
+              >
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" />
+              </marker>
+            </defs>
+            <circle cx="260" cy="176" r="128" className="atom-boundary" />
+            <circle cx="260" cy="176" r="14" className="scattering-nucleus" />
+            <text x="260" y="182" textAnchor="middle" className="nucleus-sign">
+              +
+            </text>
+            <text x="280" y="211">
+              Positive nucleus
+            </text>
+            <text x="260" y="324" textAnchor="middle">
+              Approximate atom region
+            </text>
+            {revealed && (
+              <path
+                d={current.path}
+                className="alpha-path"
+                markerEnd="url(#scattering-arrow)"
+              />
+            )}
+            <text x="18" y="245">
+              Incoming alpha (+)
+            </text>
+          </svg>
+        </DiagramFrame>
         <figcaption>
           Qualitative sketch of a path near one nucleus, not the entire foil
           experiment. Nucleus enlarged; paths, distances, and angles are

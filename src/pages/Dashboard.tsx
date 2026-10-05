@@ -4,6 +4,7 @@ import { useProgress } from "../context/ProgressContext";
 import { nextLearningLesson, topicMastery } from "../utils/learning";
 import { Meter } from "../components/progress/Meter";
 import { chapterSummary } from "../utils/chapterReview";
+import { DashboardGroup } from "../components/ui/DashboardGroup";
 import { assessments } from "../data/assessments";
 export function Dashboard() {
   const { progress } = useProgress();
@@ -109,109 +110,116 @@ export function Dashboard() {
           Open chapter review →
         </Link>
       </section>
-      {assessments
-        .filter((a) => a.scope !== "chapter")
-        .map((assessment) => (
-          <section
-            key={assessment.id}
-            className="card orbital-invitation"
-            aria-label={`Section assessment: ${assessment.sectionNumber}`}
-          >
-            <div>
-              <div className="eyebrow">CONNECT THE SECTION TOPICS</div>
-              <h2>{assessment.title}</h2>
-              <p>
-                {assessment.introduction} {assessment.questions.length} mixed
-                checks with a saved report and review links. Assessment evidence
-                is separate from lesson mastery.
-              </p>
-            </div>
-            <Link
-              className="primary action"
-              to={`/assessments/${assessment.sectionNumber}`}
+      <DashboardGroup
+        title={`Section checks · ${assessments.filter((a) => a.scope !== "chapter").length} assessments`}
+      >
+        {assessments
+          .filter((a) => a.scope !== "chapter")
+          .map((assessment) => (
+            <section
+              key={assessment.id}
+              className="card orbital-invitation"
+              aria-label={`Section assessment: ${assessment.sectionNumber}`}
             >
-              {progress.assessments?.[assessment.id]
-                ? "Resume assessment or view report"
-                : "Open assessment"}{" "}
-              →
-            </Link>
-          </section>
-        ))}
-      <div className="roadmap">
-        {chapter11.sections.map((section) => (
-          <article
-            className={`card roadmap-card ${section.id === currentSection?.id ? "current" : ""}`}
-            key={section.id}
-          >
-            <span className="section-number">{section.number}</span>
-            <h3>{section.title}</h3>
-            <p className="muted">
-              {section.topics.some((topic) => topic.lessonId)
-                ? `${section.id === currentSection?.id ? "Current section" : "Available"} · ${section.topics.filter((t) => t.lessonId).length} lessons available`
-                : "Not started · Lessons coming later"}
-            </p>
-            {section.topics.some((topic) => topic.lessonId) && (
-              <Link
-                to={`/lessons/${section.id === currentSection?.id ? current.id : section.topics.find((topic) => topic.lessonId)?.lessonId}`}
-              >
-                Open lesson →
-              </Link>
-            )}
-          </article>
-        ))}
-      </div>
-      <div className="section-heading">
-        <h2>Your available lessons</h2>
-      </div>
-      {lessons.map((lesson) => {
-        const topic = progress.topics[lesson.topicId];
-        const mastery = topicMastery(lesson.topicId, topic);
-        const completed = lesson.steps.filter((s) =>
-          topic?.completedSteps.includes(s.id),
-        ).length;
-        return (
-          <section
-            className="card progress-summary"
-            aria-label={`Progress: ${lesson.topicId}`}
-            key={lesson.id}
-          >
-            <div>
-              <div className="eyebrow">
-                {current.id === lesson.id && !currentComplete
-                  ? "CURRENT LESSON"
-                  : completed === lesson.steps.length
-                    ? "LESSON COMPLETE"
-                    : "BUILDING UNDERSTANDING"}
+              <div>
+                <div className="eyebrow">CONNECT THE SECTION TOPICS</div>
+                <h2>{assessment.title}</h2>
+                <p>
+                  {assessment.introduction} {assessment.questions.length} mixed
+                  checks with a saved report and review links. Assessment
+                  evidence is separate from lesson mastery.
+                </p>
               </div>
-              <h3>{lesson.title}</h3>
-              <p>
-                {mastery.state === "NOT_STARTED"
-                  ? "Your first practice will give us a starting point."
-                  : mastery.percent < 80
-                    ? "Keep practicing this topic to strengthen your understanding."
-                    : "Strong work. Revisit the lesson whenever you need a refresher."}
-              </p>
-              <Link className="lesson-link" to={`/lessons/${lesson.id}`}>
-                {completed === lesson.steps.length
-                  ? "Review lesson"
-                  : "Open this lesson"}{" "}
+              <Link
+                className="primary action"
+                to={`/assessments/${assessment.sectionNumber}`}
+              >
+                {progress.assessments?.[assessment.id]
+                  ? "Resume assessment or view report"
+                  : "Open assessment"}{" "}
                 →
               </Link>
-            </div>
-            <div>
-              <Meter
-                label="Lesson completion"
-                value={Math.round((completed / lesson.steps.length) * 100)}
-              />
-              <Meter label="Topic mastery" value={mastery.percent} />
-              <span className="muted">
-                {mastery.state.replaceAll("_", " ")} · {completed} of{" "}
-                {lesson.steps.length} steps complete
-              </span>
-            </div>
-          </section>
-        );
-      })}
+            </section>
+          ))}
+      </DashboardGroup>
+      <DashboardGroup
+        title={`Section roadmap · ${chapter11.sections.length} sections`}
+      >
+        <div className="roadmap">
+          {chapter11.sections.map((section) => (
+            <article
+              className={`card roadmap-card ${section.id === currentSection?.id ? "current" : ""}`}
+              key={section.id}
+            >
+              <span className="section-number">{section.number}</span>
+              <h3>{section.title}</h3>
+              <p className="muted">
+                {section.topics.some((topic) => topic.lessonId)
+                  ? `${section.id === currentSection?.id ? "Current section" : "Available"} · ${section.topics.filter((t) => t.lessonId).length} lessons available`
+                  : "Not started · Lessons coming later"}
+              </p>
+              {section.topics.some((topic) => topic.lessonId) && (
+                <Link
+                  to={`/lessons/${section.id === currentSection?.id ? current.id : section.topics.find((topic) => topic.lessonId)?.lessonId}`}
+                >
+                  Open lesson →
+                </Link>
+              )}
+            </article>
+          ))}
+        </div>
+      </DashboardGroup>
+      <DashboardGroup title={`Lesson progress · ${lessons.length} lessons`}>
+        {lessons.map((lesson) => {
+          const topic = progress.topics[lesson.topicId];
+          const mastery = topicMastery(lesson.topicId, topic);
+          const completed = lesson.steps.filter((s) =>
+            topic?.completedSteps.includes(s.id),
+          ).length;
+          return (
+            <section
+              className="card progress-summary"
+              aria-label={`Progress: ${lesson.topicId}`}
+              key={lesson.id}
+            >
+              <div>
+                <div className="eyebrow">
+                  {current.id === lesson.id && !currentComplete
+                    ? "CURRENT LESSON"
+                    : completed === lesson.steps.length
+                      ? "LESSON COMPLETE"
+                      : "BUILDING UNDERSTANDING"}
+                </div>
+                <h3>{lesson.title}</h3>
+                <p>
+                  {mastery.state === "NOT_STARTED"
+                    ? "Your first practice will give us a starting point."
+                    : mastery.percent < 80
+                      ? "Keep practicing this topic to strengthen your understanding."
+                      : "Strong work. Revisit the lesson whenever you need a refresher."}
+                </p>
+                <Link className="lesson-link" to={`/lessons/${lesson.id}`}>
+                  {completed === lesson.steps.length
+                    ? "Review lesson"
+                    : "Open this lesson"}{" "}
+                  →
+                </Link>
+              </div>
+              <div>
+                <Meter
+                  label="Lesson completion"
+                  value={Math.round((completed / lesson.steps.length) * 100)}
+                />
+                <Meter label="Topic mastery" value={mastery.percent} />
+                <span className="muted">
+                  {mastery.state.replaceAll("_", " ")} · {completed} of{" "}
+                  {lesson.steps.length} steps complete
+                </span>
+              </div>
+            </section>
+          );
+        })}
+      </DashboardGroup>
     </>
   );
 }

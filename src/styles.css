@@ -1789,3 +1789,198 @@ footer {
   border: 0;
   padding: 0.4rem 0;
 }
+
+/* Phone layouts retain readable diagrams and usable controls without page overflow. */
+.dashboard-group {
+  margin-top: 24px;
+  border: 1px solid #3a4861;
+  border-radius: 12px;
+}
+.dashboard-group > summary {
+  padding: 16px 20px;
+  min-height: 52px;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 600;
+  color: #edf1fa;
+}
+.dashboard-group-content {
+  padding: 0 18px 18px;
+}
+.dashboard-group .orbital-invitation:first-child {
+  margin-top: 8px;
+}
+.dashboard-group .progress-summary {
+  margin-top: 16px;
+}
+.dashboard-group .roadmap {
+  margin-top: 8px;
+}
+.mobile-element-picker,
+.diagram-scroll-hint {
+  display: none;
+}
+.diagram-scroll,
+.periodic-scroll {
+  max-width: 100%;
+}
+summary:focus-visible,
+select:focus-visible,
+.diagram-scroll:focus-visible,
+.periodic-scroll:focus-visible {
+  outline: 3px solid #b5cbff;
+  outline-offset: 3px;
+}
+@media (max-width: 640px) {
+  nav a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  button,
+  select {
+    min-height: 44px;
+  }
+  .dashboard-grid .focus-card {
+    display: none;
+  }
+  .dashboard-group-content {
+    padding: 0 10px 12px;
+  }
+  .dashboard-group > summary {
+    font-size: 16px;
+    padding: 16px;
+  }
+  .dashboard-group .card {
+    padding: 16px;
+  }
+  .text-button,
+  .lesson-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .roadmap {
+    grid-template-columns: 1fr;
+  }
+  .roadmap-card h3 {
+    min-height: 0;
+    font-size: 17px;
+  }
+  .roadmap-card a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .filling-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .orbital-boxes {
+    flex-wrap: wrap;
+    gap: 12px;
+    max-width: 100%;
+  }
+  .electron-slot {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+  }
+  .filling-orbital small {
+    font-size: 12px;
+  }
+  .filling-board figcaption,
+  .energy-label {
+    font-size: 14px;
+  }
+  .shape-boxes button.orbital {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+  }
+  .mobile-element-picker {
+    display: block;
+    margin: 16px 0;
+  }
+  .mobile-element-picker label {
+    display: block;
+    font-size: 16px;
+  }
+  .mobile-element-picker select {
+    width: 100%;
+    font: inherit;
+    font-size: 16px;
+    background: #172136;
+    color: #edf1fa;
+    border: 1px solid #7584a7;
+    border-radius: 8px;
+    padding: 10px;
+  }
+  .periodic-scroll,
+  .diagram-scroll {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    border: 1px solid #46516a;
+    border-radius: 8px;
+    padding: 8px;
+  }
+  .compact-periodic-table {
+    min-width: 464px;
+    grid-template-columns: 24px repeat(8, minmax(48px, 1fr));
+    grid-template-rows: 24px repeat(3, 64px);
+    gap: 6px;
+    margin: 8px 0;
+  }
+  .element-button small {
+    font-size: 12px;
+  }
+  .element-button strong {
+    font-size: 21px;
+  }
+  .group-label,
+  .period-label {
+    font-size: 14px;
+  }
+  .table-corner {
+    font-size: 11px;
+  }
+  .diagram-scroll-hint {
+    display: block;
+    font-size: 14px;
+    color: #c4cde0;
+    margin-bottom: 8px;
+  }
+  .diagram-scroll svg {
+    min-width: 440px;
+    max-width: none;
+    width: 440px;
+  }
+  .diagram-compact svg {
+    min-width: 320px;
+    width: 320px;
+  }
+  .diagram-scroll svg text {
+    font-size: 18px;
+  }
+  .diagram-scroll .nucleus-sign {
+    font-size: 18px;
+  }
+  .wave-figure figcaption,
+  .hydrogen-figure figcaption,
+  .emission-figure figcaption,
+  .scattering-figure figcaption,
+  .cloud-figure figcaption,
+  .bohr-figure figcaption,
+  .energy-comparison figcaption,
+  .orbital-shape-figure figcaption {
+    font-size: 14px;
+  }
+  input[type="range"] {
+    min-height: 44px;
+    touch-action: pan-y;
+  }
+}
+.lesson-layout > * {
+  min-width: 0;
+}

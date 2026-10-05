@@ -1,3 +1,4 @@
+import { DiagramFrame } from "./DiagramFrame";
 import { useState } from "react";
 import {
   energyComparisons,
@@ -50,32 +51,34 @@ export function MultiElectronExplorer({
         ))}
       </fieldset>
       <figure className="energy-comparison">
-        <svg
-          viewBox="0 0 440 220"
-          role="img"
-          aria-label={
-            model.id === "hydrogen"
-              ? "Hydrogen: 2s and three 2p orbitals at equal energy"
-              : "Multi-electron model: 2s below three equal-energy 2p orbitals"
-          }
-        >
-          <path className="energy-axis" d="M40 195V25L34 35M40 25L46 35" />
-          <text x="15" y="18">
-            E
-          </text>
-          <g className="energy-lines">
-            <path d={`M85 ${model.sY}H155`} />
-            {[220, 285, 350].map((x) => (
-              <path key={x} d={`M${x} ${model.pY}h45`} />
-            ))}
-          </g>
-          <text x="105" y={model.sY + 25}>
-            2s
-          </text>
-          <text x="285" y={model.pY + 25}>
-            2p
-          </text>
-        </svg>
+        <DiagramFrame label="Sublevel energy comparison" compact>
+          <svg
+            viewBox="0 0 440 220"
+            role="img"
+            aria-label={
+              model.id === "hydrogen"
+                ? "Hydrogen: 2s and three 2p orbitals at equal energy"
+                : "Multi-electron model: 2s below three equal-energy 2p orbitals"
+            }
+          >
+            <path className="energy-axis" d="M40 195V25L34 35M40 25L46 35" />
+            <text x="15" y="18">
+              E
+            </text>
+            <g className="energy-lines">
+              <path d={`M85 ${model.sY}H155`} />
+              {[220, 285, 350].map((x) => (
+                <path key={x} d={`M${x} ${model.pY}h45`} />
+              ))}
+            </g>
+            <text x="105" y={model.sY + 25}>
+              2s
+            </text>
+            <text x="285" y={model.pY + 25}>
+              2p
+            </text>
+          </svg>
+        </DiagramFrame>
         <figcaption>
           Higher on the page means higher energy. Qualitative comparison, not
           measured gaps or a universal energy chart.

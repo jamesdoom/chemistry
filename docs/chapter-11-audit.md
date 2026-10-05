@@ -56,3 +56,8 @@ Review recommendations use transparent rules in `src/utils/chapterReview.ts`: le
 - Vite reports advisory React Router directive warnings and a main bundle above 500 kB (about 150 kB gzip). Compilation succeeds; route/content splitting is a possible later performance refinement.
 
 Best next step: use the completed Chapter 11 flow with the student and collect the specific explanations and review paths that still leave them stuck before expanding the course.
+
+
+## Mobile polish follow-up
+
+Phone controls were enlarged, dashboard groups now collapse by default, and diagram/table scrolling is contained within labeled keyboard-focusable regions. A phone element picker supplements the enlarged first-18 table without changing selection or completion evidence. Native expanders preserve desktop/tablet defaults and touch/keyboard operation. The new mobile browser check passes 320px/390px touch use, saved assessment resume, 48px exercise targets, minimum rendered diagram font size, and viewport transitions. All prior browser flows remain passing; the two Section 11.3 lesson checks now open the phone lesson-progress group before inspecting its meters. These are browser-emulation checks, not physical-device certification.

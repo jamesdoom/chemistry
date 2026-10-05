@@ -100,6 +100,7 @@ const {
       .waitFor();
     await page.getByRole("link", { name: "Back to dashboard" }).click();
     await page.reload();
+    await page.getByText(/Lesson progress/, { exact: true }).click();
     const card = page.getByRole("region", {
       name: "Progress: 11.3-0",
       exact: true,

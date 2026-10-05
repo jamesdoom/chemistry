@@ -1,3 +1,4 @@
+import { DiagramFrame } from "./DiagramFrame";
 import { useState } from "react";
 import { probabilitySamples } from "../../data/probabilityCloud";
 export function ProbabilityExplorer({
@@ -44,33 +45,35 @@ export function ProbabilityExplorer({
         }}
       />
       <figure className="cloud-figure">
-        <svg
-          viewBox="0 0 500 380"
-          role="img"
-          aria-label={`${count} independent synthetic position outcomes, projected from 3D onto the page. Dots form a probability pattern, not a connected path. Dashed drawing guide radius ${boundary}.`}
-        >
-          <defs>
-            <radialGradient id="cloud-shading">
-              <stop offset="0" stopColor="#c0b4ff" stopOpacity=".35" />
-              <stop offset="1" stopColor="#c0b4ff" stopOpacity="0" />
-            </radialGradient>
-          </defs>
-          <circle cx="250" cy="190" r="165" fill="url(#cloud-shading)" />
-          <circle cx="250" cy="190" r={boundary} className="cloud-boundary" />
-          {probabilitySamples.slice(0, count).map((p) => (
-            <circle
-              key={p.id}
-              cx={p.x}
-              cy={p.y}
-              r="2"
-              className="cloud-outcome"
-            />
-          ))}
-          <circle cx="250" cy="190" r="4" className="scattering-nucleus" />
-          <text x="250" y="355" textAnchor="middle">
-            Independent outcomes—not an electron trail
-          </text>
-        </svg>
+        <DiagramFrame label="Probability cloud diagram">
+          <svg
+            viewBox="0 0 500 380"
+            role="img"
+            aria-label={`${count} independent synthetic position outcomes, projected from 3D onto the page. Dots form a probability pattern, not a connected path. Dashed drawing guide radius ${boundary}.`}
+          >
+            <defs>
+              <radialGradient id="cloud-shading">
+                <stop offset="0" stopColor="#c0b4ff" stopOpacity=".35" />
+                <stop offset="1" stopColor="#c0b4ff" stopOpacity="0" />
+              </radialGradient>
+            </defs>
+            <circle cx="250" cy="190" r="165" fill="url(#cloud-shading)" />
+            <circle cx="250" cy="190" r={boundary} className="cloud-boundary" />
+            {probabilitySamples.slice(0, count).map((p) => (
+              <circle
+                key={p.id}
+                cx={p.x}
+                cy={p.y}
+                r="2"
+                className="cloud-outcome"
+              />
+            ))}
+            <circle cx="250" cy="190" r="4" className="scattering-nucleus" />
+            <text x="250" y="355" textAnchor="middle">
+              Independent outcomes—not an electron trail
+            </text>
+          </svg>
+        </DiagramFrame>
         <figcaption>
           Synthetic hydrogen 1s samples projected from three dimensions; not
           measured data. Soft shading is qualitative and not calibrated

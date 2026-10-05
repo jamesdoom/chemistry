@@ -1,3 +1,4 @@
+import { DiagramFrame } from "./DiagramFrame";
 import { useState } from "react";
 import {
   energyTransitions,
@@ -44,61 +45,63 @@ export function EmissionExplorer({
         ))}
       </select>
       <figure className="energy-figure">
-        <svg
-          viewBox="0 0 520 330"
-          role="img"
-          aria-label={`Illustrative allowed levels A: 0, B: 2, C: 5. ${revealed ? `Atom energy change ${facts.delta}; photon energy ${facts.photonEnergy}; ${facts.absorption ? "absorption" : "emission"}.` : "Reveal the transition to see its energy change."}`}
-        >
-          <defs>
-            <marker
-              id="energy-arrow"
-              viewBox="0 0 10 10"
-              refX="8"
-              refY="5"
-              markerWidth="6"
-              markerHeight="6"
-              orient="auto"
-            >
-              <path d="M 0 0 L 10 5 L 0 10 z" fill="#c0b4ff" />
-            </marker>
-          </defs>
-          <text x="25" y="30">
-            Energy ↑ (illustrative units)
-          </text>
-          {illustrativeLevels.map((l) => (
-            <g key={l.id}>
+        <DiagramFrame label="Emission energy and spectrum diagram">
+          <svg
+            viewBox="0 0 520 330"
+            role="img"
+            aria-label={`Illustrative allowed levels A: 0, B: 2, C: 5. ${revealed ? `Atom energy change ${facts.delta}; photon energy ${facts.photonEnergy}; ${facts.absorption ? "absorption" : "emission"}.` : "Reveal the transition to see its energy change."}`}
+          >
+            <defs>
+              <marker
+                id="energy-arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="6"
+                markerHeight="6"
+                orient="auto"
+              >
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#c0b4ff" />
+              </marker>
+            </defs>
+            <text x="25" y="30">
+              Energy ↑ (illustrative units)
+            </text>
+            {illustrativeLevels.map((l) => (
+              <g key={l.id}>
+                <line
+                  x1="85"
+                  x2="370"
+                  y1={y(l.energy)}
+                  y2={y(l.energy)}
+                  className="energy-level"
+                />
+                <text x="390" y={y(l.energy) + 5}>
+                  {l.label}: {l.energy}
+                </text>
+              </g>
+            ))}
+            {revealed && (
               <line
-                x1="85"
-                x2="370"
-                y1={y(l.energy)}
-                y2={y(l.energy)}
-                className="energy-level"
+                x1="235"
+                x2="235"
+                y1={y(facts.from.energy)}
+                y2={y(facts.to.energy)}
+                className="energy-transition"
+                markerEnd="url(#energy-arrow)"
               />
-              <text x="390" y={y(l.energy) + 5}>
-                {l.label}: {l.energy}
-              </text>
-            </g>
-          ))}
-          {revealed && (
-            <line
-              x1="235"
-              x2="235"
-              y1={y(facts.from.energy)}
-              y2={y(facts.to.energy)}
-              className="energy-transition"
-              markerEnd="url(#energy-arrow)"
+            )}
+            <circle
+              cx="130"
+              cy={y(revealed ? facts.to.energy : facts.from.energy)}
+              r="7"
+              className="energy-state"
             />
-          )}
-          <circle
-            cx="130"
-            cy={y(revealed ? facts.to.energy : facts.from.energy)}
-            r="7"
-            className="energy-state"
-          />
-          <text x="25" y="313">
-            ● marks the selected atom’s energy state
-          </text>
-        </svg>
+            <text x="25" y="313">
+              ● marks the selected atom’s energy state
+            </text>
+          </svg>
+        </DiagramFrame>
         <figcaption>
           Invented three-level model with unequal gaps; not measured levels of a
           real element. Energy height represents energy, not distance from a

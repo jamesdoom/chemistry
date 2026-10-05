@@ -1,3 +1,4 @@
+import { DiagramFrame } from "./DiagramFrame";
 import { useState } from "react";
 import {
   hydrogenEnergy,
@@ -42,65 +43,73 @@ export function HydrogenExplorer({
         ))}
       </select>
       <figure className="hydrogen-figure">
-        <svg
-          viewBox="0 0 520 445"
-          role="img"
-          aria-label={`Hydrogen energy diagram: n 1 lowest, n 2 and n 3 closer together, ionization at zero. ${revealed ? `Energy change ${transition.delta.toExponential(3)} joules.` : "Reveal the selected transition."}`}
-        >
-          <defs>
-            <marker
-              id="hydrogen-arrow"
-              viewBox="0 0 10 10"
-              refX="8"
-              refY="5"
-              markerWidth="6"
-              markerHeight="6"
-              orient="auto"
-            >
-              <path d="M 0 0 L 10 5 L 0 10 z" fill="#c0b4ff" />
-            </marker>
-          </defs>
-          <text x="25" y="20">
-            Energy ↑
-          </text>
-          <line x1="65" x2="280" y1="40" y2="40" className="ionization-limit" />
-          <text x="295" y="45">
-            Free electron: 0 J
-          </text>
-          {[3, 2, 1].map((n) => (
-            <g key={n}>
-              <line
-                x1="65"
-                x2="280"
-                y1={y(hydrogenEnergy(n))}
-                y2={y(hydrogenEnergy(n))}
-                className="energy-level"
-              />
-              <text x="295" y={y(hydrogenEnergy(n)) + 5}>
-                n = {n}: {hydrogenEnergy(n).toExponential(2)} J
-              </text>
-            </g>
-          ))}
-          <circle
-            cx="90"
-            cy={y(revealed ? transition.final : transition.initial)}
-            r="6"
-            className="energy-state"
-          />
-          {revealed && (
+        <DiagramFrame label="Hydrogen energy diagram">
+          <svg
+            viewBox="0 0 520 445"
+            role="img"
+            aria-label={`Hydrogen energy diagram: n 1 lowest, n 2 and n 3 closer together, ionization at zero. ${revealed ? `Energy change ${transition.delta.toExponential(3)} joules.` : "Reveal the selected transition."}`}
+          >
+            <defs>
+              <marker
+                id="hydrogen-arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="6"
+                markerHeight="6"
+                orient="auto"
+              >
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#c0b4ff" />
+              </marker>
+            </defs>
+            <text x="25" y="20">
+              Energy ↑
+            </text>
             <line
-              x1="205"
-              x2="205"
-              y1={y(transition.initial)}
-              y2={y(transition.final)}
-              className="energy-transition"
-              markerEnd="url(#hydrogen-arrow)"
+              x1="65"
+              x2="280"
+              y1="40"
+              y2="40"
+              className="ionization-limit"
             />
-          )}
-          <text x="25" y="432">
-            Energy states, not positions or electron paths
-          </text>
-        </svg>
+            <text x="295" y="45">
+              Free electron: 0 J
+            </text>
+            {[3, 2, 1].map((n) => (
+              <g key={n}>
+                <line
+                  x1="65"
+                  x2="280"
+                  y1={y(hydrogenEnergy(n))}
+                  y2={y(hydrogenEnergy(n))}
+                  className="energy-level"
+                />
+                <text x="295" y={y(hydrogenEnergy(n)) + 5}>
+                  n = {n}: {hydrogenEnergy(n).toExponential(2)} J
+                </text>
+              </g>
+            ))}
+            <circle
+              cx="90"
+              cy={y(revealed ? transition.final : transition.initial)}
+              r="6"
+              className="energy-state"
+            />
+            {revealed && (
+              <line
+                x1="205"
+                x2="205"
+                y1={y(transition.initial)}
+                y2={y(transition.final)}
+                className="energy-transition"
+                markerEnd="url(#hydrogen-arrow)"
+              />
+            )}
+            <text x="25" y="432">
+              Energy states, not positions or electron paths
+            </text>
+          </svg>
+        </DiagramFrame>
         <figcaption>
           Approximate hydrogen energies from Eₙ = −2.18 × 10⁻¹⁸ J / n². Heights
           follow the energy scale; n = 4, 5, … exist closer to zero but are
