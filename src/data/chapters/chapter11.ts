@@ -72,7 +72,7 @@ export const chapter11: Chapter = {
           ? { lessonId: "hydrogen-orbitals" }
           : i === 1
             ? { lessonId: "further-development" }
-            : {}),
+            : { assessmentId: "11.3-2" }),
       })),
     },
     {

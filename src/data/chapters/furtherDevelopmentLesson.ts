@@ -7,6 +7,7 @@ export const furtherDevelopmentLesson: Lesson = {
   summary:
     "Electron interactions split sublevel energies in multi-electron atoms. Spin and Pauli allow two opposite-spin electrons per orbital, giving s/p/d/f capacities of 2/6/10/14. Aufbau selects lower-energy sublevels; Hund distributes electrons singly with parallel spins among equal-energy orbitals before pairing.",
   completionActions: [
+    { label: "Check Section 11.3 understanding →", to: "/assessments/11.3" },
     {
       label: "Practice orbital filling →",
       to: "/practice/orbitals",
