@@ -37,6 +37,7 @@ export interface PracticeQuestion {
   inputPlaceholder?: string;
   fallbackFeedback?: string;
   choices?: { value: string; label: string }[];
+  numericAnswer?: { value: number; relativeTolerance: number };
 }
 export type LessonVisual =
   | { kind: "oxygen-orbitals" }
@@ -45,7 +46,7 @@ export type LessonVisual =
 export type LessonStep =
   | {
       id: string;
-      kind: "scattering-explorer";
+      kind: "scattering-explorer" | "wave-explorer";
       title: string;
       text: string;
       continueLabel?: string;

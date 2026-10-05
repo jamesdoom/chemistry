@@ -8,7 +8,7 @@ Three Section 11.4 learning topics are functional:
 - Electron Configurations and the Periodic Table: valence electrons, groups/periods, a first-18 table, and helium's exception.
 - Atomic Properties and the Periodic Table: size, shielding, nuclear attraction, first ionization energy, and sublevel/pairing exceptions.
 
-Section 11.4 Assessment is functional: ten mixed checks, a saved latest-attempt report, and concept-specific review links. Assessment evidence is saved separately from lesson scores. Rutherford’s Atom in Section 11.1 is now functional, with a qualitative scattering explorer. The remaining topics in Sections 11.1–11.3 remain navigation metadata, not completed lessons. The plan completes the listed course topics with original supplemental teaching; it does not reproduce every detail of the textbook.
+Section 11.4 Assessment is functional: ten mixed checks, a saved latest-attempt report, and concept-specific review links. Assessment evidence is saved separately from lesson scores. Rutherford’s Atom in Section 11.1 is now functional, with a qualitative scattering explorer. Energy and Light is also functional, including a wave/amplitude explorer and numerical practice. The remaining topics in Sections 11.1–11.3 remain navigation metadata, not completed lessons. The plan completes the listed course topics with original supplemental teaching; it does not reproduce every detail of the textbook.
 
 ## Rules for each update
 
@@ -28,7 +28,7 @@ Add an original qualitative scattering activity: most positive alpha particles p
 
 Done when: students explain each observation without confusing the nucleus with an electron cloud.
 
-### 3. Section 11.1 — Energy and Light
+### 3. Section 11.1 — Energy and Light — completed
 
 Use an adjustable wave visual to teach wavelength, frequency, and photon energy. Distinguish amplitude from frequency and energy per photon. For light in the same medium, longer wavelength means lower frequency; higher frequency means higher photon energy. Begin with qualitative comparisons, then supported calculations using c = λν and E = hν. Add unit/scientific-notation handling and numerical tolerance behind grading utilities only when those calculations need it.
 
@@ -88,4 +88,4 @@ Done when: all 15 listed Chapter 11 topics have functional lessons/assessments, 
 
 ## Implementation order
 
-Milestone 1 is complete. Milestone 2 is complete. Start milestone 3 next: Energy and Light. Then continue through 11.1, 11.2, and 11.3 in order. Milestones containing multiple lessons or an assessment deliberately span separate updates. Revisit scope after each milestone using actual student misconceptions and course expectations, keeping optional content distinct from required mastery evidence.
+Milestone 1 is complete. Milestone 2 is complete. Milestone 3 is complete. Start milestone 4 next: Emission of Energy by Atoms. Then continue through 11.1, 11.2, and 11.3 in order. Milestones containing multiple lessons or an assessment deliberately span separate updates. Revisit scope after each milestone using actual student misconceptions and course expectations, keeping optional content distinct from required mastery evidence.

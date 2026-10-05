@@ -24,7 +24,9 @@ test("Rutherford retains stable curriculum identity and complete question feedba
       if (c.value !== q.answer) assert.ok(q.misconceptionFeedback[c.value]);
   }
   const progress = emptyProgress();
-  for (const lesson of lessons.filter((l) => l.id !== "rutherford"))
+  for (const lesson of lessons.filter(
+    (l) => l.id !== "rutherford" && l.id !== "energy-light",
+  ))
     progress.topics[lesson.topicId] = {
       completedSteps: lesson.steps.map((s) => s.id),
       results: {},

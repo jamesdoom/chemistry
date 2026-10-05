@@ -1505,3 +1505,51 @@ footer {
   line-height: 1.6;
   margin-top: 0.75rem;
 }
+
+.wave-explorer label {
+  display: block;
+  margin: 1rem 0 0.5rem;
+  font-weight: 600;
+}
+.wave-explorer input[type="range"] {
+  width: 100%;
+  accent-color: #c0b4ff;
+}
+.wave-figure {
+  margin: 1.5rem 0;
+}
+.wave-figure svg {
+  width: 100%;
+  background: #101827;
+  border-radius: 16px;
+}
+.wave-axis {
+  stroke: #71839c;
+  stroke-dasharray: 4 5;
+}
+.wave-path {
+  stroke: #c0b4ff;
+  stroke-width: 3;
+  fill: none;
+}
+.wave-measure {
+  stroke: #f4c66b;
+  stroke-width: 2;
+}
+.wave-figure text {
+  fill: #e3eaf4;
+  font-size: 14px;
+}
+.wave-figure figcaption {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #a8b8cd;
+}
+.wave-readouts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+}
+.wave-readouts p {
+  overflow-wrap: anywhere;
+}

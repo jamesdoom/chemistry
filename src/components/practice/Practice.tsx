@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { PracticeQuestion } from "../../types/curriculum";
 import { useProgress } from "../../context/ProgressContext";
+import { gradeNumericAnswer } from "../../utils/light";
 export function normalizeAnswer(value: string): string {
   return value
     .toLowerCase()
@@ -38,7 +39,15 @@ export function Practice({
   ];
   function check() {
     const normalized = normalizeAnswer(answer);
-    const success = normalized === normalizeAnswer(question.answer);
+    const numeric = question.numericAnswer
+      ? gradeNumericAnswer(
+          answer,
+          question.numericAnswer.value,
+          question.numericAnswer.relativeTolerance,
+        )
+      : undefined;
+    const success =
+      numeric?.correct ?? normalized === normalizeAnswer(question.answer);
     setAttempted(true);
     setCorrect(success);
     if (onAnswer) onAnswer(success, help > 0);
@@ -49,7 +58,8 @@ export function Practice({
     setFeedback(
       success
         ? `You’ve got it. ${question.explanation}`
-        : (targeted ??
+        : (numeric?.feedback ??
+            targeted ??
             question.fallbackFeedback ??
             "Compare your answer with the concept, or use a hint to break it into smaller steps."),
     );

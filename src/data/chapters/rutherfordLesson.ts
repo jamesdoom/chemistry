@@ -8,6 +8,7 @@ export const rutherfordLesson: Lesson = {
   summary:
     "Mostly straight paths point to mostly empty space. Rare large deflections point to a small, massive, positive nucleus. Observations support a model; they do not reveal everything about an atom.",
   completionActions: [
+    { label: "Continue to Energy and Light →", to: "/lessons/energy-light" },
     {
       label: "Connect to electron arrangements →",
       to: "/lessons/first-18",
