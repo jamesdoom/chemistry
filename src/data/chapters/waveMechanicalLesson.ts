@@ -7,6 +7,7 @@ export const waveMechanicalLesson: Lesson = {
   summary:
     "An orbital is a wave function for a state, not a travel path. Probability clouds represent likely position outcomes, not many electrons in one atom. Drawing boundaries are not walls, and quantized bound energies remain part of the modern model.",
   completionActions: [
+    { label: "Check Section 11.2 understanding →", to: "/assessments/11.2" },
     {
       label: "Compare with the Bohr picture →",
       to: "/lessons/bohr-model",

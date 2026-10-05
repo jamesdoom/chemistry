@@ -52,7 +52,7 @@ export const chapter11: Chapter = {
             ? { lessonId: "bohr-model" }
             : i === 2
               ? { lessonId: "wave-mechanical" }
-              : {}),
+              : { assessmentId: "11.2-3" }),
       })),
     },
     {
