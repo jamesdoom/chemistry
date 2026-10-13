@@ -1,3 +1,4 @@
+import { focusedLessons } from "../data/focusedLessons.ts";
 import { lessons } from "../data/chapters/chapter11.ts";
 import { orbitalExercises } from "../data/practice/orbitals.ts";
 import { calculateMastery } from "./mastery.ts";
@@ -16,7 +17,7 @@ export function nextLearningLesson(progress: StudentProgress) {
 }
 export function topicQuestionIds(topicId: string): string[] {
   return [
-    ...lessons
+    ...[...lessons, ...focusedLessons]
       .filter((l) => l.topicId === topicId)
       .flatMap((l) =>
         l.steps.flatMap((s) =>

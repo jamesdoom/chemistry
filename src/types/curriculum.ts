@@ -117,6 +117,7 @@ export type LessonStep =
       question: PracticeQuestion;
     };
 export interface Lesson {
+  sectionNumber?: string;
   id: string;
   topicId: string;
   title: string;

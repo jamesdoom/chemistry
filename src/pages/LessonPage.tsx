@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { focusedLessons } from "../data/focusedLessons";
 import { chapter11, lessons } from "../data/chapters/chapter11";
 import { useProgress } from "../context/ProgressContext";
 import { OrbitalVisual } from "../components/learning/OrbitalVisual";
@@ -67,7 +68,12 @@ function LearningExperience({ lesson }: { lesson: Lesson }) {
         ← Chapter 11 roadmap
       </Link>
       <div className="eyebrow">
-        LEARN / {section ? `SECTION ${section.number}` : "CHAPTER 11"}
+        LEARN /{" "}
+        {section
+          ? `SECTION ${section.number}`
+          : lesson.sectionNumber
+            ? `SECTION ${lesson.sectionNumber}`
+            : "CHAPTER 11"}
       </div>
       <h1 className="lesson-title">{lesson.title}</h1>
       <p className="muted">{lesson.subtitle}</p>
@@ -333,7 +339,7 @@ function LearningExperience({ lesson }: { lesson: Lesson }) {
 }
 export function LessonPage() {
   const { lessonId } = useParams();
-  const lesson = lessons.find((l) => l.id === lessonId);
+  const lesson = [...lessons, ...focusedLessons].find((l) => l.id === lessonId);
   return lesson ? (
     <LearningExperience key={lesson.id} lesson={lesson} />
   ) : (

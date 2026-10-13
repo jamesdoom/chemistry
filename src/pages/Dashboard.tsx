@@ -40,6 +40,22 @@ export function Dashboard() {
         Chemistry makes more sense when you can see how the pieces fit. Let’s
         build that understanding together.
       </p>
+      <section
+        className="card orbital-invitation"
+        aria-label="Current learning focus"
+      >
+        <div>
+          <div className="eyebrow">CURRENT FOCUS · SECTION 11.4</div>
+          <h2>Atomic radius and periodic trends</h2>
+          <p>
+            Explain size with electron configurations, then build and interpret
+            a radius graph.
+          </p>
+        </div>
+        <Link className="primary action" to="/learn/atomic-radius">
+          Open atomic-radius path →
+        </Link>
+      </section>
       <div className="dashboard-grid">
         <section className="card hero-card">
           <div className="eyebrow">
