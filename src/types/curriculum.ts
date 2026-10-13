@@ -61,7 +61,8 @@ export type LessonStep =
         | "bohr-explorer"
         | "probability-explorer"
         | "orbital-shapes-explorer"
-        | "multi-electron-explorer";
+        | "multi-electron-explorer"
+        | "radius-graph-explorer";
       title: string;
       text: string;
       continueLabel?: string;

@@ -1984,3 +1984,62 @@ select:focus-visible,
 .lesson-layout > * {
   min-width: 0;
 }
+
+.radius-graph-explorer label {
+  display: block;
+  margin-top: 1rem;
+}
+.radius-graph-explorer select,
+.radius-graph-explorer input {
+  display: block;
+  width: 100%;
+  max-width: 440px;
+  padding: 0.75rem;
+  margin: 0.4rem 0 1rem;
+  font: inherit;
+  font-size: 16px;
+  color: #edf1fa;
+  background: #172136;
+  border: 1px solid #7584a7;
+  border-radius: 8px;
+  min-height: 48px;
+}
+.radius-data {
+  margin: 1.5rem 0;
+}
+.radius-data summary {
+  cursor: pointer;
+  padding: 0.75rem 0;
+}
+.radius-data table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+.radius-data th,
+.radius-data td {
+  text-align: left;
+  padding: 0.6rem;
+  border-bottom: 1px solid #46516a;
+}
+.radius-graph-explorer figure {
+  margin: 1.5rem 0;
+}
+.radius-graph-explorer svg {
+  width: 100%;
+  max-width: 550px;
+  display: block;
+}
+.radius-graph-explorer svg text {
+  fill: #e4eafd;
+  font-size: 18px;
+}
+.radius-grid {
+  stroke: #46516a;
+  stroke-width: 1;
+}
+@media (max-width: 640px) {
+  .radius-data table {
+    min-width: 340px;
+  }
+}

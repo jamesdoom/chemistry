@@ -1,3 +1,4 @@
+import { RadiusGraphExplorer } from "../components/learning/RadiusGraphExplorer";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { focusedLessons } from "../data/focusedLessons";
@@ -130,7 +131,8 @@ function LearningExperience({ lesson }: { lesson: Lesson }) {
                 step.kind === "bohr-explorer" ||
                 step.kind === "probability-explorer" ||
                 step.kind === "orbital-shapes-explorer" ||
-                step.kind === "multi-electron-explorer"
+                step.kind === "multi-electron-explorer" ||
+                step.kind === "radius-graph-explorer"
                   ? "Explore"
                   : step.kind === "checkpoint"
                     ? "Mastery check"
@@ -279,6 +281,15 @@ function LearningExperience({ lesson }: { lesson: Lesson }) {
                       continueLabel={step.continueLabel ?? "Continue →"}
                     />
                   )}
+                </>
+              )}
+              {step.kind === "radius-graph-explorer" && (
+                <>
+                  <p className="lesson-copy">{step.text}</p>
+                  <RadiusGraphExplorer
+                    onComplete={advance}
+                    continueLabel={step.continueLabel ?? "Continue →"}
+                  />
                 </>
               )}
               {step.kind === "multi-electron-explorer" && (

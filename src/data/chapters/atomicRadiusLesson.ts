@@ -9,6 +9,10 @@ export const atomicRadiusLesson: Lesson = {
     "Atomic size is a defined measure, not a hard cloud edge. Compare occupied levels first, then core shielding and nuclear attraction. Radius generally decreases across a period and increases down a group; new occupied levels explain resets between periods.",
   completionActions: [
     {
+      label: "Build your radius graph →",
+      to: "/lessons/atomic-radius-graphing",
+    },
+    {
       label: "Back to the atomic-radius path →",
       to: "/learn/atomic-radius",
     },
