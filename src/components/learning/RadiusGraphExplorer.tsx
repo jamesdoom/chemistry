@@ -215,7 +215,21 @@ export function RadiusGraphExplorer({
                         <circle
                           cx={p.x}
                           cy={p.y}
-                          r="5"
+                          r={
+                            plotted.some(
+                              (a) => a.atomicNumber === d.atomicNumber,
+                            )
+                              ? 6
+                              : 3
+                          }
+                          stroke={
+                            plotted.some(
+                              (a) => a.atomicNumber === d.atomicNumber,
+                            )
+                              ? "#edf1fa"
+                              : "none"
+                          }
+                          strokeWidth="1.5"
                           fill={
                             plotted.some(
                               (a) => a.atomicNumber === d.atomicNumber,
@@ -237,8 +251,9 @@ export function RadiusGraphExplorer({
             <figcaption>
               The line connects different elements in atomic-number order; it is
               not a time history or an electron path. Both axes start at
-              consistent scales. Filled points show your plotted entries; the
-              legend is also given in text.
+              consistent scales. Large outlined dots are your plotted points;
+              small dots are reference points. Your required points are also
+              listed below.
             </figcaption>
           </figure>
           <ul className="exploration-checklist">

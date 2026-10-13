@@ -1,3 +1,4 @@
+import { atomicRadiusAssessment } from "./chapters/atomicRadiusAssessment.ts";
 import { section111Assessment } from "./chapters/section111Assessment.ts";
 import { section114Assessment } from "./chapters/section114Assessment.ts";
 import { section112Assessment } from "./chapters/section112Assessment.ts";
@@ -10,3 +11,6 @@ export const assessments = [
   section114Assessment,
   chapter11Review,
 ];
+
+export const focusedAssessments = [atomicRadiusAssessment];
+export const allAssessments = [...assessments, ...focusedAssessments];

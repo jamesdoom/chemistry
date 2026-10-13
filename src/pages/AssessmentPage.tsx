@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { assessments } from "../data/assessments";
+import { allAssessments } from "../data/assessments";
 import type { Assessment } from "../types/curriculum";
 import { useProgress } from "../context/ProgressContext";
 import { Practice } from "../components/practice/Practice";
@@ -29,7 +29,7 @@ function AssessmentExperience({ assessment }: { assessment: Assessment }) {
       </Link>
       <div className="eyebrow">
         CHECK YOUR UNDERSTANDING /{" "}
-        {assessment.scope === "chapter"
+        {assessment.scope
           ? "CHAPTER 11"
           : `SECTION ${assessment.sectionNumber}`}
       </div>
@@ -110,6 +110,11 @@ function AssessmentExperience({ assessment }: { assessment: Assessment }) {
                 Open your chapter review paths →
               </Link>
             )}
+            {assessment.scope === "focused" && (
+              <Link className="primary action" to="/learn/atomic-radius">
+                Open your atomic-radius review paths →
+              </Link>
+            )}
             <Link className="primary action" to="/">
               Back to dashboard →
             </Link>
@@ -154,7 +159,7 @@ function AssessmentExperience({ assessment }: { assessment: Assessment }) {
 }
 export function AssessmentPage() {
   const { sectionNumber } = useParams();
-  const assessment = assessments.find(
+  const assessment = allAssessments.find(
     (item) => item.sectionNumber === sectionNumber,
   );
   return assessment ? (

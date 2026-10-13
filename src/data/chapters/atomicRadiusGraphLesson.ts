@@ -9,6 +9,10 @@ export const atomicRadiusGraphLesson: Lesson = {
     "A radius graph compares different elements in atomic-number order. Use atomic number on x and radius in pm on y. Decreases within a period reflect increasing net nuclear attraction; upward resets reflect new occupied levels. Use the supplied data definition, not a memorized radius number.",
   completionActions: [
     {
+      label: "Check atomic-radius understanding →",
+      to: "/assessments/atomic-radius",
+    },
+    {
       label: "Back to the atomic-radius path →",
       to: "/learn/atomic-radius",
     },

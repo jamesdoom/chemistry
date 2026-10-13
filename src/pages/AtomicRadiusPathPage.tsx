@@ -1,3 +1,6 @@
+import { focusedAssessments } from "../data/assessments";
+import { assessmentSummary } from "../utils/assessment";
+import { reviewRecommendations } from "../utils/chapterReview";
 import { Link } from "react-router-dom";
 import { focusedLessons } from "../data/focusedLessons";
 import { useProgress } from "../context/ProgressContext";
@@ -5,13 +8,20 @@ import { topicMastery } from "../utils/learning";
 import { Meter } from "../components/progress/Meter";
 export function AtomicRadiusPathPage() {
   const { progress } = useProgress();
-  const next =
-    focusedLessons.find(
-      (l) =>
-        !l.steps.every((s) =>
-          progress.topics[l.topicId]?.completedSteps.includes(s.id),
-        ),
-    ) ?? focusedLessons[0]!;
+  const next = focusedLessons.find(
+    (l) =>
+      !l.steps.every((s) =>
+        progress.topics[l.topicId]?.completedSteps.includes(s.id),
+      ),
+  );
+  const check = focusedAssessments[0]!;
+  const report = assessmentSummary(
+    progress.assessments?.[check.id],
+    check.questions.map((q) => q.id),
+  );
+  const review = reviewRecommendations(progress).filter((r) =>
+    focusedLessons.some((l) => r.to === `/lessons/${l.id}`),
+  );
   return (
     <>
       <div className="eyebrow">CURRENT LEARNING PATH · SECTION 11.4</div>
@@ -20,9 +30,46 @@ export function AtomicRadiusPathPage() {
         Use electron configurations to explain atomic size. Build the reasoning
         first, then practice reading and graphing the repeating pattern.
       </p>
-      <Link className="primary action" to={`/lessons/${next.id}`}>
-        Continue atomic-radius path →
-      </Link>
+      {next ? (
+        <Link className="primary action" to={`/lessons/${next.id}`}>
+          Continue atomic-radius path →
+        </Link>
+      ) : (
+        <Link className="primary action" to="/assessments/atomic-radius">
+          {report.complete
+            ? "View your understanding report"
+            : "Check your understanding"}{" "}
+          →
+        </Link>
+      )}
+      <section
+        className="card review-paths"
+        aria-label="Atomic-radius review recommendations"
+      >
+        <h2>What to review next</h2>
+        {review.length ? (
+          <ul className="topic-list">
+            {review.map((r) => (
+              <li key={r.to}>
+                <div>
+                  <h3>{r.title}</h3>
+                  <ul>
+                    {r.reasons.map((reason) => (
+                      <li key={reason}>{reason}</li>
+                    ))}
+                  </ul>
+                  <Link to={r.to}>Review this concept →</Link>
+                </div>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>
+            No weak-topic evidence yet. Work through the lessons and focused
+            check to find your next review step.
+          </p>
+        )}
+      </section>
       <section className="card review-paths" aria-label="Atomic-radius lessons">
         <h2>Your learning sequence</h2>
         <ol className="topic-list">
@@ -49,6 +96,26 @@ export function AtomicRadiusPathPage() {
             );
           })}
         </ol>
+      </section>
+      <section
+        className="card review-paths"
+        aria-label="Atomic-radius understanding check"
+      >
+        <h2>{check.title}</h2>
+        <p>
+          Six original checks connect configurations, radius, and graph
+          reasoning. Your latest report saves separately from lesson mastery.
+        </p>
+        <p>
+          {report.complete
+            ? `Complete · ${report.percent}% first-try understanding`
+            : progress.assessments?.[check.id]
+              ? `${report.completed} of ${report.total} checks complete`
+              : "Not started"}
+        </p>
+        <Link className="primary action" to="/assessments/atomic-radius">
+          Open focused check →
+        </Link>
       </section>
       <section className="card">
         <h2>Need a starting point?</h2>

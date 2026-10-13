@@ -1,5 +1,6 @@
 import { chapter11, lessons } from "../data/chapters/chapter11.ts";
-import { assessments } from "../data/assessments.ts";
+import { focusedLessons } from "../data/focusedLessons.ts";
+import { assessments, allAssessments } from "../data/assessments.ts";
 import { assessmentSummary } from "./assessment.ts";
 import { topicMastery, topicQuestionIds } from "./learning.ts";
 import type { StudentProgress, TopicProgress } from "../types/progress";
@@ -88,13 +89,15 @@ export function reviewRecommendations(
 ): ReviewRecommendation[] {
   const byRoute = new Map<string, ReviewRecommendation>();
   function add(to: string, reason: string) {
-    const lesson = lessons.find((l) => to === `/lessons/${l.id}`);
+    const lesson = [...lessons, ...focusedLessons].find(
+      (l) => to === `/lessons/${l.id}`,
+    );
     if (!lesson) return;
     const item = byRoute.get(to) ?? { to, title: lesson.title, reasons: [] };
     if (!item.reasons.includes(reason)) item.reasons.push(reason);
     byRoute.set(to, item);
   }
-  for (const lesson of lessons) {
+  for (const lesson of [...lessons, ...focusedLessons]) {
     const saved: TopicProgress | undefined = progress.topics[lesson.topicId];
     const results = topicQuestionIds(lesson.topicId).flatMap((id) =>
       saved?.results[id] ? [saved.results[id]!] : [],
@@ -106,7 +109,7 @@ export function reviewRecommendations(
       );
   }
   // Latest assessment reports stay separate from accumulated lesson mastery.
-  for (const assessment of assessments)
+  for (const assessment of allAssessments)
     for (const q of assessment.questions) {
       const r = progress.assessments?.[assessment.id]?.results[q.id];
       if (
